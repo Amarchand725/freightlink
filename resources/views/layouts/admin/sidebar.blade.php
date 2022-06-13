@@ -1,6 +1,12 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav icon_imgs" id="sidebar-nav">
         <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ url('/') }}" target="_blank">
+            <img src="{{ asset('public/admin/assets/img/frieght-imgs/home-ic.png') }}" alt="dashboard" class="img-fluid">
+            <span> &nbsp; Home Page</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link {{ request()->is('dashboard') || request()->is('profile/*') ? 'active' : '' }}" href="{{ url('dashboard') }}">
                 <img src="{{ asset('public/admin/assets/img/frieght-imgs/dashboard-icon-p.png') }}" alt="dashboard" class="img-fluid">
                 <span> &nbsp; Dashboard</span>
@@ -22,6 +28,20 @@
                 <span> &nbsp; users</span>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('partner.index') }}">
+                <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
+                <span> &nbsp; Partners</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('benefit.index') }}">
+                <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
+                <span> &nbsp; Benefits</span>
+            </a>
+        </li>
         <!-- End Forms Nav -->
 
         <li class="nav-item">
@@ -37,16 +57,22 @@
                 <img src="{{ asset('public/admin/assets/img/frieght-imgs/settings-p.png') }}" alt="dashboard" class="img-fluid">
                 <span> &nbsp; Settings</span>
             </a>
-
+        </li>
+        <li class="nav-item">
+            @php
+                $mail_setting = App\Models\MailSetting::orderby('id', 'desc')->first();
+            @endphp
+            @if($mail_setting)
+                <a class="nav-link {{ request()->is('mail_setting.edit') ? 'active' : '' }}" href="{{ route('mail_setting.edit', $mail_setting->id) }}">
+            @else
+                <a class="nav-link {{ request()->is('mail_setting.create') ? 'active' : '' }}" href="{{ route('mail_setting.create') }}">
+            @endif
+                <img src="{{ asset('public/admin/assets/img/frieght-imgs/subscribe-p.png') }}" alt="dashboard" class="img-fluid">
+                <span class="nav-link-text">{{ __('Mail Settings') }}</span>
+            </a>
         </li>
         <!-- End Charts Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-            <img src="{{ asset('public/admin/assets/img/frieght-imgs/home-ic.png') }}" alt="dashboard" class="img-fluid">
-            <span> &nbsp; Home Page</span>
-            </a>
-        </li>
         <!-- End Icons Nav -->
 
         <li class="nav-item">

@@ -73,7 +73,6 @@
     <script src="{{ asset('public/admin/assets/vendor/quill/quill.min.js') }}"></script>
     <script src="{{ asset('public/admin/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('public/admin/assets/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('public/js/summernote.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="{{ asset('public/js/toastr.min.js') }}"></script>

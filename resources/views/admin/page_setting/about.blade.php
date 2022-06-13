@@ -41,46 +41,92 @@
 						<input type="hidden" name="parent_slug" id="" value="{{ $model->slug }}">
 						<div class="box box-info">
 							<div class="box-body">
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Title </label>
-									<div class="col-sm-9">
-										<input type="text" name="about_heading" class="form-control" value="{!! isset($page_data['about_heading'])?$page_data['about_heading']:'' !!}" placeholder="Enter heading">
+								<div class="row">
+									<div class="form-group mb-3">
+										<label for="" class="col-sm-2 control-label">Heading </label>
+										<div class="col-sm-12">
+											<input type="text" name="about_heading" class="form-control" value="{!! isset($page_data['about_heading'])?$page_data['about_heading']:'' !!}" placeholder="Enter heading">
+										</div>
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">About Content </label>
-									<div class="col-sm-9">
-										<textarea name="about_content" class="form-control" cols="30" rows="10" placeholder="Enter left content">{!! isset($page_data['about_content'])?$page_data['about_content']:'' !!}</textarea>
+								<div class="row">
+									<div class="form-group mb-3">
+										<label for="" class="col-sm-2 control-label">Title </label>
+										<div class="col-sm-12">
+											<input type="text" name="about_title" class="form-control" value="{!! isset($page_data['about_title'])?$page_data['about_title']:'' !!}" placeholder="Enter title">
+										</div>
 									</div>
 								</div>
+								<div class="row">
+									<div class="form-group mb-3">
+										<label for="" class="col-sm-2 control-label">About Content </label>
+										<div class="col-sm-12">
+											<textarea name="about_content" class="form-control texteditor" cols="30" rows="10" placeholder="Enter left content">{!! isset($page_data['about_content'])?$page_data['about_content']:'' !!}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group mb-3">
+											<label for="" class="control-label">Total Members </label>
+											<input type="number" name="about_total_members" class="form-control" value="{!! isset($page_data['about_total_members'])?$page_data['about_total_members']:'' !!}" placeholder="Enter title">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group mb-3">
+											<label for="" class="control-label">Total Countries </label>
+											<input type="number" name="about_total_countries" class="form-control" value="{!! isset($page_data['about_total_countries'])?$page_data['about_total_countries']:'' !!}" placeholder="Enter title">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group mb-3">
+											<label for="" class="control-label">Total Cities </label>
+											<input type="number" name="about_total_cities" class="form-control" value="{!! isset($page_data['about_total_cities'])?$page_data['about_total_cities']:'' !!}" placeholder="Enter title">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group mb-3">
+											<label for="" class="control-label">Total Offices </label>
+											<input type="number" name="about_total_offices" class="form-control" value="{!! isset($page_data['about_total_offices'])?$page_data['about_total_offices']:'' !!}" placeholder="Enter title">
+										</div>
+									</div>
+								</div>
+
 								@if(isset($page_data['about_side_image']))
-									<div class="form-group">
-										<label for="" class="col-sm-2 control-label">Existing Image</label>
-										<div class="col-sm-6" style="padding-top:6px;">
-											<img src="{{ asset('/public/admin/assets/images/page/'.$page_data['about_side_image']) }}" class="existing-photo" style="height:180px;">
+									<div class="row">
+										<div class="form-group mb-3">
+											<label for="" class="col-sm-2 control-label">Existing Image</label>
+											<div class="col-sm-6" style="padding-top:6px;">
+												<img src="{{ asset('/public/admin/assets/images/page/'.$page_data['about_side_image']) }}" class="existing-photo" style="height:180px;">
+											</div>
 										</div>
 									</div>
 								@endif
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Side Image </label>
-									<div class="col-sm-9">
-										<input type="file" name="about_side_image" class="form-control">
+								<div class="row">
+									<div class="form-group mb-3">
+										<label for="" class="col-sm-2 control-label">Side Image </label>
+										<div class="col-sm-12">
+											<input type="file" name="about_side_image" class="form-control">
+										</div>
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Show on Home? </label>
-									<div class="col-sm-2">
-										<select name="about_status" class="form-control select2 select2-accessible" style="width:auto;" tabindex="-1" aria-hidden="true">
-											<option value="1" {{ (isset($page_data['about_status'])?($page_data['about_status']==1?'selected':''):'') }}>Show</option>
-											<option value="0" {{ (isset($page_data['about_status'])?($page_data['about_status']==0?'selected':''):'') }}>Hide</option>
-										</select>
+								<div class="row">
+									<div class="form-group mb-3">
+										<label for="" class="col-sm-2 control-label">Show on Home? </label>
+										<div class="col-sm-3">
+											<select name="about_status" class="form-control select2 select2-accessible" style="width:auto;" tabindex="-1" aria-hidden="true">
+												<option value="1" {{ (isset($page_data['about_status'])?($page_data['about_status']==1?'selected':''):'') }}>Show</option>
+												<option value="0" {{ (isset($page_data['about_status'])?($page_data['about_status']==0?'selected':''):'') }}>Hide</option>
+											</select>
+										</div>
 									</div>
 								</div>
-								
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label"></label>
-									<div class="col-sm-6">
-										<button type="submit" class="btn btn-primary buttons_green pull-left" name="form_about">Save</button>
+								<div class="row">
+									<div class="form-group">
+										<label for="" class="col-sm-2 control-label"></label>
+										<div class="col-sm-6">
+											<button type="submit" class="btn btn-primary buttons_green pull-left" name="form_about">Save</button>
+										</div>
 									</div>
 								</div>
 							</div>

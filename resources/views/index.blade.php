@@ -10,10 +10,11 @@
     <div class="container" data-aos="fade-in">
       <div class="row">
         <div class=" col-lg-6 col-md-6 aos-init aos-animate pt-5">
-          <h1>Meet. <span class="conenct">Connect</span>. Ship.</h1>
-          <h2>Freightlink Networks is a community where freight forwarders <br> connect, grow and prosper. We are all about
-            building a
-            strong <br> network for forwarders through connection, opportunity and  <br> community.</h2>
+          <?php 
+            $title = explode(' ', isset($home_page_data['home_title'])?$home_page_data['home_title']:'');
+          ?>
+          <h1>{{ isset($title[0])?$title[0]:'' }}<span class="conenct">{{ isset($title[1])?$title[1]:'' }}</span>{{ isset($title[2])?$title[2]:'' }}</h1>
+          <h2>{{ isset($home_page_data['description'])?$home_page_data['description']:'' }}</h2>
         </div>
         <div class=" col-lg-5 col-md-6 aos-init aos-animate offset-1 form_head">
 
@@ -74,7 +75,9 @@
             <h2>Trusted by the best Companies & Partners</h2>
           </div>
           <div class="col-lg-8">
-            <img src="{{ asset('public/web/assets/img/frieght-imgs/clients-logos.png') }}" alt="client-1" class="img-fluid">
+            @foreach ($partners as $partner)
+              <img src="{{ asset('public/admin/images/partners') }}/{{ $partner->image }}" style="width:130px" alt="client-1" class="img-fluid">
+            @endforeach
           </div>
         </div>
       </div>
@@ -86,52 +89,35 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-7 col-lg-4 icon-boxes d-flex flex-column align-items-stretch justify-content-center ">
-            <h4 data-aos="fade-up colors"><b>GLOBAL NETWORK</b></h4>
-            <h3 data-aos="fade-up">Join, Link and Ship in Just a Few Clicks.</h3>
+            <h4 data-aos="fade-up colors"><b>{{ isset($home_page_data['about_heading'])?$home_page_data['about_heading']:'' }}</b></h4>
+            <h3 data-aos="fade-up">{{ isset($home_page_data['about_title'])?$home_page_data['about_title']:'' }}</h3>
             <p data-aos="fade-up">
-              Freightlink is an all-in-one-network with all-encompassing benefits which meet the keystone needs of its
-              members.
-              Through our platform all members are better placed to improve their marketing and advertising,
-              international reputation,
-              service offerings and bottom-line.
-            </p>
-
-            <p data-aos="fade-up">
-              Our members are of the highest quality and must meet all of our criteria before they are introduced to our
-              community. We
-              pride ourselves on selecting those members who are trusted in their field of expertise and who can bring
-              the most to the
-              network to ensure mutually beneficial partnerships for all members.
-
-            </p>
-
-            <p data-aos="fade-up">
-              Unlike any other network, our members are able to be part of the development of the network by
-              recommending trusted and
-              professional partners. In so doing, members are able to earn a recurring commission based on the number of
-              successful
-              referrals.
+              {!! isset($home_page_data['about_content'])?$home_page_data['about_content']:'' !!}
             </p>
           </div>
 
           <div class="col-xl-5 col-lg-8 count_txtss  " data-aos="fade-left">
-            <img src="{{ asset('public/web/assets/img/frieght-imgs/network.png') }}" alt="network" class="img-fluid">
+            @if($home_page_data['about_side_image'])
+              <img src="{{ asset('public/admin/assets/images/page') }}/{{ $home_page_data['about_side_image'] }}" alt="network" class="img-fluid">
+            @else 
+              <img src="{{ asset('public/web/assets/img/frieght-imgs/network.png') }}" alt="network" class="img-fluid">
+            @endif
             <div class="counts" data-aos="fade-right">
               <div class="row">
                 <div class="col-3">
-                  <b class="counts_txt">100</b> <br>
+                  <b class="counts_txt">{{ isset($home_page_data['about_total_members'])?$home_page_data['about_total_members']:'' }}</b> <br>
                   <small><b>Members</b></small>
                 </div>
                 <div class="col-3">
-                  <b class="counts_txt">100</b> <br>
+                  <b class="counts_txt">{{ isset($home_page_data['about_total_countries'])?$home_page_data['about_total_countries']:'' }}</b> <br>
                   <small><b>Countries</b></small>
                 </div>
                 <div class="col-3">
-                  <b class="counts_txt">100</b> <br>
+                  <b class="counts_txt">{{ isset($home_page_data['about_total_cities'])?$home_page_data['about_total_cities']:'' }}</b> <br>
                   <small><b>Cities</b></small>
                 </div>
                 <div class="col-3">
-                  <b class="counts_txt">100</b> <br>
+                  <b class="counts_txt">{{ isset($home_page_data['about_total_offices'])?$home_page_data['about_total_offices']:'' }}</b> <br>
                   <small><b>Offices</b></small>
                 </div>
               </div>
@@ -471,7 +457,7 @@
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
-          form.submit();
+          return true;
           // $.ajax({
           //   url : "{{ route('subscribe.store') }}",
           //   data : {'email':subscriber_email},

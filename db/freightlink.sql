@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2022 at 05:52 PM
+-- Generation Time: Jun 13, 2022 at 06:06 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -24,6 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `benefits`
+--
+
+CREATE TABLE `benefits` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -36,6 +54,33 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mail_settings`
+--
+
+CREATE TABLE `mail_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `mail_mailer` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail_host` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail_port` int(10) UNSIGNED NOT NULL,
+  `mail_username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail_encryption` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mail_from_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mail_from_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mail_settings`
+--
+
+INSERT INTO `mail_settings` (`id`, `mail_mailer`, `mail_host`, `mail_port`, `mail_username`, `mail_password`, `mail_encryption`, `mail_from_address`, `mail_from_name`, `created_at`, `updated_at`) VALUES
+(1, 'smtp', 'smtp.gmail.com', 587, 'softwaredeveloper992@gmail.com', 'fttfhtuaxmtjvhqa', 'tls', NULL, NULL, '2022-06-09 03:35:15', '2022-06-13 04:13:14');
 
 -- --------------------------------------------------------
 
@@ -58,7 +103,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2022_06_09_105851_create_permission_tables', 1);
+(5, '2022_06_09_105851_create_permission_tables', 1),
+(9, '2022_06_13_120719_create_partners_table', 2),
+(10, '2022_06_13_154022_create_benefits_table', 3);
 
 -- --------------------------------------------------------
 
@@ -184,7 +231,51 @@ INSERT INTO `page_settings` (`id`, `parent_slug`, `key`, `value`, `created_at`, 
 (38, 'contact', 'contact_phone', '123455555', '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
 (39, 'contact', 'contact_map', NULL, '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
 (40, 'contact', 'form_contact', NULL, '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
-(41, 'header', 'header_alert_message', 'Join our Affiliate Program and earn up to $500 per referral.', '2022-06-10 09:40:55', '2022-06-10 09:40:55');
+(41, 'header', 'header_alert_message', 'Join our Affiliate Program and earn up to $500 per referral.', '2022-06-10 09:40:55', '2022-06-10 09:40:55'),
+(42, 'about', '_token', 'N0b337FiWxOAdDpVPGeydG980kD20NgrAQehh9xR', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(43, 'about', 'parent_slug', 'about', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(44, 'about', 'about_heading', 'GLOBAL NETWORK', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(45, 'about', 'about_title', 'Join, Link and Ship in Just a Few Clicks.', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(46, 'about', 'about_content', '<p class=\"aos-init aos-animate\" data-aos=\"fade-up\">Freightlink is an all-in-one-network with all-encompassing benefits which meet the keystone needs of its members. Through our platform all members are better placed to improve their marketing and advertising, international reputation, service offerings and bottom-line.</p>\r\n<p class=\"aos-init aos-animate\" data-aos=\"fade-up\">Our members are of the highest quality and must meet all of our criteria before they are introduced to our community. We pride ourselves on selecting those members who are trusted in their field of expertise and who can bring the most to the network to ensure mutually beneficial partnerships for all members.</p>\r\n<p class=\"aos-init aos-animate\" data-aos=\"fade-up\">Unlike any other network, our members are able to be part of the development of the network by recommending trusted and professional partners. In so doing, members are able to earn a recurring commission based on the number of successful referrals.</p>', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(47, 'about', 'about_total_members', '100', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(48, 'about', 'about_total_countries', '100', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(49, 'about', 'about_total_cities', '100', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(50, 'about', 'about_total_offices', '100', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(51, 'about', 'about_status', '1', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(52, 'about', 'form_about', NULL, '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(53, 'about', 'about_side_image', '1306202215302362a7580fa9013.png', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
+(54, 'about', 'about_bellow_label', 'Why The Best Companies Choose Freightlink.', '2022-06-13 10:37:24', '2022-06-13 10:37:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `partners`
+--
+
+CREATE TABLE `partners` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `partners`
+--
+
+INSERT INTO `partners` (`id`, `created_by`, `name`, `slug`, `description`, `image`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(4, 1, 'FDRS', 'fdrs', '<p>FDRS Limited</p>', '13-06-2022-145703.png', 1, NULL, '2022-06-13 09:47:54', '2022-06-13 09:57:03'),
+(5, 1, 'Freightrise', 'freightrise', '<p>Freightrise Limited</p>', '13-06-2022-144817.png', 1, NULL, '2022-06-13 09:48:17', '2022-06-13 09:48:17'),
+(6, 1, 'Marsh', 'marsh', '<p>Marsh Limited</p>', '13-06-2022-144836.jfif', 1, NULL, '2022-06-13 09:48:36', '2022-06-13 09:48:36'),
+(7, 1, 'Cargo', 'cargo', '<p>Cargo cover</p>', '13-06-2022-144902.png', 1, NULL, '2022-06-13 09:49:02', '2022-06-13 09:49:02'),
+(8, 1, 'Freightify', 'freightify', '<p>Freightify</p>', '13-06-2022-145017.png', 1, NULL, '2022-06-13 09:50:17', '2022-06-13 09:50:17'),
+(9, 1, 'Change', 'change', '<p>Change</p>', '13-06-2022-145621.png', 1, NULL, '2022-06-13 09:56:21', '2022-06-13 09:56:21');
 
 -- --------------------------------------------------------
 
@@ -322,11 +413,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `referral_code`, `name`, `last_name`, `phone`, `promo_code`, `email`, `temprary_email`, `email_verified_at`, `password`, `remember_token`, `status`, `verify_token`, `image`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, '4046', 'BG7kf4qV', 'Hardik', '', '', '', 'admin@gmail.com', NULL, NULL, '$2y$10$TrSMTkdqZ4CkZe8zLOz/AuMG5CYt3vVpO4dHwUN.ecPMsAorlD416', NULL, 1, NULL, NULL, NULL, NULL, NULL);
+(1, '4046', 'BG7kf4qV', 'Hardik', '', '', '', 'chandamar725@gmail.com', NULL, NULL, '$2y$10$TrSMTkdqZ4CkZe8zLOz/AuMG5CYt3vVpO4dHwUN.ecPMsAorlD416', NULL, 1, NULL, NULL, NULL, NULL, '2022-06-13 06:16:17');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `benefits`
+--
+ALTER TABLE `benefits`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -334,6 +431,12 @@ INSERT INTO `users` (`id`, `user_id`, `referral_code`, `name`, `last_name`, `pho
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `mail_settings`
+--
+ALTER TABLE `mail_settings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -365,6 +468,12 @@ ALTER TABLE `pages`
 -- Indexes for table `page_settings`
 --
 ALTER TABLE `page_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `partners`
+--
+ALTER TABLE `partners`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -414,16 +523,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `benefits`
+--
+ALTER TABLE `benefits`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `mail_settings`
+--
+ALTER TABLE `mail_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -435,7 +556,13 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `page_settings`
 --
 ALTER TABLE `page_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `partners`
+--
+ALTER TABLE `partners`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `permissions`

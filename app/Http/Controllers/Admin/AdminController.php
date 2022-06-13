@@ -69,7 +69,7 @@ class AdminController extends Controller
     public function forgotPassword()
     {
         $page_title = 'Forgot Password';
-        return view('auth.passwords.forgot-password', compact('page_title'));
+        return view('auth.admin.passwords.forgot-password', compact('page_title'));
     }
     public function passwordResetLink(Request $request)
     {
@@ -77,8 +77,11 @@ class AdminController extends Controller
             'email' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->where('status', 1)->first();
-        if(!empty($user)){
+        $user = User::where('email', $request->email)->first();
+        if(!empty($user) && $user->status==0){
+            return redirect()->route('admin.login')->with('message', 'Your account is not activate. We have sent you email for activating.!');
+        }
+        if(!empty($user) && $user->status==1 && $user->hasRole($request->user_type)){
             $page_title = 'Change Password';
             do{
                 $verify_token = uniqid();
@@ -98,13 +101,13 @@ class AdminController extends Controller
     
             return redirect()->route('admin.login')->with('message', 'We have emailed your password reset link!');
         }else{
-            return redirect()->back()->with('error', 'Your account not found.');
+            return redirect()->back()->with('error', 'Your account not found');
         }
     }
     public function resetPassword($verify_token)
     {
         $page_title = 'Reset Password';
-        return view('web-views.login.change-password', compact('page_title', 'verify_token'));
+        return view('auth.admin.passwords.change-password', compact('page_title', 'verify_token'));
     }
     public function changePassword(Request $request)
     {
@@ -118,7 +121,7 @@ class AdminController extends Controller
         $user->update();
 
         if($user){
-            return redirect()->route('admin.login')->with('message', 'You have updated password. You can login again.');
+            return redirect()->route('admin.login')->with('message', 'You have updated password. You can login now.');
         }else{
             return redirect()->back()->with('error', 'Something went wrong try again');
         }

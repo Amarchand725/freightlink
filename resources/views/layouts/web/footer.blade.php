@@ -26,7 +26,7 @@
                 </div>
               </li>
               <li><button type="submit" class="nav-link scrollto btn btn-primary text-black subscribe-btn"><b>Subscribe</b></button></li>
-          </form>
+            </form>
           </ul>
         </nav>
       </div>

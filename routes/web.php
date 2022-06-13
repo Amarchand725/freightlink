@@ -27,6 +27,12 @@ Route::post('admin/logout', 'Admin\AdminController@logOut')->name('admin.logout'
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
+//user reset password
+Route::get('user/forgot_password', 'WebController@forgotPassword')->name('user.forgot_password');
+Route::get('user/send-password-reset-link', 'WebController@passwordResetLink')->name('user.send-password-reset-link');
+Route::get('user/reset-password/{token}', 'WebController@resetPassword')->name('user.reset-password');
+Route::post('user/change_password', 'WebController@changePassword')->name('user.change_password');
+
 //admin reset password
 Route::get('admin/forgot_password', 'Admin\AdminController@forgotPassword')->name('admin.forgot_password');
 Route::get('admin/send-password-reset-link', 'Admin\AdminController@passwordResetLink')->name('admin.send-password-reset-link');
@@ -61,5 +67,14 @@ Route::resource('service', 'Admin\ServiceController');
 Route::resource('page', 'Admin\PageController');
 Route::resource('page_setting', 'Admin\PageSettingController');
 
+//mail settings
+Route::resource('mail_setting', 'Admin\MailSettingController');
+
 //package
 Route::resource('package', 'Admin\PackageController');
+
+//partner
+Route::resource('partner', 'Admin\PartnerController');
+
+//benefit
+Route::resource('benefit', 'Admin\BenefitController');

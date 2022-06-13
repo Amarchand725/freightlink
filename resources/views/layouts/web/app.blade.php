@@ -26,10 +26,11 @@
     <link href="{{ asset('public/web/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('public/css/toastr.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/css/summernote.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/summernote.css') }}">
 
     <!-- freightlink  Main CSS File -->
     <link href="{{ asset('public/web/assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/admin/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -37,10 +38,18 @@
     @stack('css')
 
     <!-- <link href="font/Mont-Black.otf" rel="stylesheet"> -->
+    <script src="{{asset('public/admin/assets/js/jquery-2.2.4.min.js')}}"></script>
     <script src="{{ asset('public/admin/assets/js/jquery.slim.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ asset('public/admin/assets/js/popper.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ asset('public/admin/assets/js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
-    <script src="{{ asset('public/admin/assets/js/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ asset('public/admin/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('public/js/summernote.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="{{ asset('public/js/toastr.min.js') }}"></script>
+	<script src="{{ asset('public/js/search.js') }}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{ asset('public/admin/assets/js/main.js') }}"></script>
 </head>
 
 <body>
