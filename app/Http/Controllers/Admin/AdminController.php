@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Subscriber;
 use Auth;
 
 class AdminController extends Controller
@@ -125,5 +126,12 @@ class AdminController extends Controller
         }else{
             return redirect()->back()->with('error', 'Something went wrong try again');
         }
+    }
+
+    public function subscribe()
+    {
+        $page_title = 'All Subscribers';
+        $models = Subscriber::orderby('id', 'desc')->paginate(10);
+        return view('admin.subscriber.index', compact('page_title', 'models'));
     }
 }

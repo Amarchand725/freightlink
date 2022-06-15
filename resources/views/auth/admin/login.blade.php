@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-5 col-lg-5 mx-auto  ">
-                        <form action="{{ route('authenticate') }}" method="post">
+                        <form action="{{ route('admin.authenticate') }}" method="post">
                             @csrf
 
                             <input type="hidden" name="user_type" value="Admin">

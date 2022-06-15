@@ -17,6 +17,7 @@ class CreateBenefitsTable extends Migration
             $table->id();
             $table->bigInteger('created_by');
             $table->string('title');
+            $table->string('slug');
             $table->text('description');
             $table->string('icon');
             $table->boolean('status')->default(1);

@@ -41,38 +41,50 @@
 						<input type="hidden" name="parent_slug" id="" value="{{ $model->slug }}">
 						<div class="box box-info">
 							<div class="box-body">
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Contact Heading </label>
+								<div class="form-group mt-3">
+									<label for="" class="col-sm-2 control-label">Heading </label>
 									<div class="col-sm-9">
 										<input type="text" name="contact_heading" class="form-control" value="{{ isset($page_data['contact_heading'])?$page_data['contact_heading']:'' }}" placeholder="Enter heading">
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Contact Address </label>
+								<div class="form-group mt-3">
+									<label for="" class="col-sm-2 control-label">Address </label>
 									<div class="col-sm-9">
 										<textarea class="form-control" name="contact_address" style="height:60px;" placeholder="Enter address">{{ isset($page_data['contact_address'])?$page_data['contact_address']:'' }}</textarea>
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Contact Email </label>
+								<div class="form-group mt-3">
+									<label for="" class="col-sm-2 control-label">Email </label>
 									<div class="col-sm-9">
 										<input type="email" class="form-control" name="contact_email" value="{{ isset($page_data['contact_email'])?$page_data['contact_email']:'' }}" placeholder="Enter email">
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Contact Phone </label>
+								<div class="form-group mt-3">
+									<label for="" class="col-sm-2 control-label">Phone </label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control" name="contact_phone" value="{{ isset($page_data['contact_phone'])?$page_data['contact_phone']:'' }}" placeholder="Enter phone number">
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Contact Map (iframe Code) </label>
+								<div class="form-group mt-3">
+									<label for="" class="control-label">Home Page Contact Label </label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" name="contact_home_page_label" value="{{ isset($page_data['contact_home_page_label'])?$page_data['contact_home_page_label']:'' }}" placeholder="Enter home page contact label">
+									</div>
+								</div>
+								<div class="form-group mt-3">
+									<label for="" class="col-sm-2 control-label">Description </label>
+									<div class="col-sm-9">
+										<textarea class="form-control" name="contact_description" style="height:60px;" placeholder="Enter contact_description">{{ isset($page_data['contact_description'])?$page_data['contact_description']:'' }}</textarea>
+									</div>
+								</div>
+								<div class="form-group mt-3">
+									<label for="" class="col-sm-2 control-label">Map (iframe Code) </label>
 									<div class="col-sm-9">
 										<textarea class="form-control" name="contact_map" style="height:120px;" placeholder="Enter map iframe code">{{ isset($page_data['contact_map'])?$page_data['contact_map']:'' }}</textarea>
 									</div>
 								</div>
 								
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label"></label>
 									<div class="col-sm-6">
 										<button type="submit" class="btn btn-primary buttons_green pull-left" name="form_contact">Save</button>

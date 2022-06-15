@@ -18,13 +18,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
-    {
-        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:user-create', ['only' => ['create','store']]);
-        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
-    }
     public function index(Request $request)
     {
         if($request->ajax()){
@@ -41,12 +34,12 @@ class UserController extends Controller
                 }
                 $query->where('status', $request['status']);
             }
-            $users = $query->paginate(10);
-            return (string) view('admin.user.search', compact('users'));
+            $models = $query->paginate(10);
+            return (string) view('admin.user.search', compact('models'));
         }
-        $page_title = 'All Users';
-        $users = User::orderBy('id','DESC')->paginate(10);
-        return view('admin.user.index', compact('users','page_title'));
+        $page_title = 'All Companies';
+        $models = User::orderBy('id','DESC')->role('Company')->paginate(10);
+        return view('admin.user.index', compact('models','page_title'));
     }
 
     /**
@@ -73,14 +66,14 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'role' => 'required'
         ]);
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        $user->assignRole($request->input('role'));
 
         return redirect()->route('user.index')
                         ->with('message','User created successfully');
@@ -94,8 +87,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('users.show',compact('user'));
+        $page_title = 'Edit Company Details';
+        $model = User::find($id);
+        return view('admin.user.show',compact('model', 'page_title'));
     }
 
     /**

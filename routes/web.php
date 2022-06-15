@@ -16,28 +16,41 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'WebController@index');
-Route::post('subscribe/store', 'WebController@subscriberStore')->name('subscribe.store');
+Route::get('contact', 'WebController@contact')->name('contact');
+Route::get('about-us', 'WebController@aboutUs')->name('about-us');
+Route::get('benefits', 'WebController@benefits')->name('benefits');
+Route::get('network', 'WebController@network')->name('network');
+Route::get('faqs', 'WebController@faqs')->name('faqs');
+Route::post('register/store', 'WebController@store')->name('register.store');
+Route::get('thanks', 'WebController@thanks')->name('thanks');
+Route::post('contact/store', 'WebController@contactStore')->name('contact.store');
+Route::get('subscribe/store', 'WebController@subscriberStore')->name('subscribe.store');
 
 //Admin login
 Route::get('admin/login', 'Admin\AdminController@login')->name('admin.login');
-Route::post('authenticate', 'Admin\AdminController@authenticate')->name('authenticate');
+Route::post('admin/authenticate', 'Admin\AdminController@authenticate')->name('admin.authenticate');
 Route::get('/admin/profile/edit', 'Admin\AdminController@editProfile')->name('admin.profile.edit');
 Route::post('/admin/profile/update', 'Admin\AdminController@updateProfile')->name('admin.profile.update');
 Route::post('admin/logout', 'Admin\AdminController@logOut')->name('admin.logout');
-
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-
-//user reset password
-Route::get('user/forgot_password', 'WebController@forgotPassword')->name('user.forgot_password');
-Route::get('user/send-password-reset-link', 'WebController@passwordResetLink')->name('user.send-password-reset-link');
-Route::get('user/reset-password/{token}', 'WebController@resetPassword')->name('user.reset-password');
-Route::post('user/change_password', 'WebController@changePassword')->name('user.change_password');
 
 //admin reset password
 Route::get('admin/forgot_password', 'Admin\AdminController@forgotPassword')->name('admin.forgot_password');
 Route::get('admin/send-password-reset-link', 'Admin\AdminController@passwordResetLink')->name('admin.send-password-reset-link');
 Route::get('admin/reset-password/{token}', 'Admin\AdminController@resetPassword')->name('admin.reset-password');
 Route::post('admin/change_password', 'Admin\AdminController@changePassword')->name('admin.change_password');
+
+Route::get('subscribe/index', 'Admin\AdminController@subscribe')->name('subscribe.index');
+
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+//user login
+Route::post('user/authenticate', 'WebController@authenticate')->name('user.authenticate');
+
+//user reset password
+Route::get('user/forgot_password', 'WebController@forgotPassword')->name('user.forgot_password');
+Route::get('user/send-password-reset-link', 'WebController@passwordResetLink')->name('user.send-password-reset-link');
+Route::get('user/reset-password/{token}', 'WebController@resetPassword')->name('user.reset-password');
+Route::post('user/change_password', 'WebController@changePassword')->name('user.change_password');
 
 //Home
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
@@ -78,3 +91,9 @@ Route::resource('partner', 'Admin\PartnerController');
 
 //benefit
 Route::resource('benefit', 'Admin\BenefitController');
+
+//expands possibility
+Route::resource('expands_possibility', 'Admin\ConnectExpandsPossibilityController');
+
+//faqs
+Route::resource('faq', 'Admin\FaqController');

@@ -25,8 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::check() && Auth::user()->hasRole('Admin')){
-            $page_title = 'Freightlink - Admin-Dashboard';
+            $page_title = 'Admin Dashboard - Freightlink';
             return View('admin.dashboard.dashboard', compact('page_title'));
+        }elseif(Auth::check()){
+            $page_title = 'Company Dashboard - Freightlink';
+            return View('web.dashboard.dashboard', compact('page_title'));
         }else{
             return redirect()->route('admin.login');
         }

@@ -58,7 +58,7 @@ class BenefitController extends Controller
         $validator = $request->validate([
             'title' => 'required|unique:benefits,title',
             'image' => 'required',
-            'description' => 'max:255',
+            'description' => 'max:500',
         ]);
 
         $model = new Benefit();
@@ -71,6 +71,7 @@ class BenefitController extends Controller
 
         $model->created_by = Auth::user()->id;
         $model->title = $request->title;
+        $model->slug = \Str::slug($request->title);
         $model->description = $request->description;
         $model->save();
 
@@ -111,7 +112,7 @@ class BenefitController extends Controller
     public function update(Request $request, Benefit $benefit)
     {
         $validator = $request->validate([
-            'description' => 'max:255',
+            'description' => 'max:500',
         ]);
 
         if (isset($request->image)) {

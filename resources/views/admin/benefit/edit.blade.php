@@ -51,7 +51,7 @@
 								</div>
 								@if($model->icon)
 									<div class="form-group mb-3">
-										<label for="" class="col-sm-2 control-label">Exist Logo </label>
+										<label for="" class="col-sm-2 control-label">Exist Icon </label>
 										<div class="col-sm-9" style="padding-top:5px">
 											<img src="{{ asset('public/admin/images/benefits') }}/{{ $model->icon }}" alt="Post" height="5%" width="5%">
 										</div>

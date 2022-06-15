@@ -13,7 +13,7 @@
                         <form method="GET" action="{{ route('user.send-password-reset-link') }}">
                             @csrf
 
-                            <input type="hidden" name="user_type" value="User">
+                            <input type="hidden" name="user_type" value="Company">
                             <span class="text-white join_txt">Email Address</span>
                             <div class="row text-center d-flex justify-content-center pt-3">
                                 <div class="form-group col-md-8 pb-3">
@@ -32,7 +32,11 @@
                 </div>
             </div>
             <br><br><br><br>
-            <img src="{{ asset('public/web/assets/img/frieght-imgs/confirm-imges (1).png') }}" alt="conatc-frm" class="img-fluid">
+            <div class="" style="text-align: center">
+                @foreach (getPartners() as $partner)
+                    <img src="{{ asset('public/admin/images/partners') }}/{{ $partner->image }}" style="width:130px; height:50px; margin-left:5px" alt="client-1" class="img-fluid">
+                @endforeach
+            </div>
         </section>
     </main>
 @endsection

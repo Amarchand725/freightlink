@@ -1,9 +1,6 @@
 <?php 
 use App\Models\PageSetting;
-use App\Models\Course;
-use App\Models\Notification;
-use App\Models\Blog;
-use App\Models\BookInterview;
+use App\Models\Partner;
 
 function globalData()
 {
@@ -15,30 +12,6 @@ function globalData()
     return $home_page_data;
 }
 
-function courses($degree)
-{
-    return $courses = Course::where('degree_slug', $degree)->get(['degree_slug', 'title', 'slug']);
-}
-
-function notification($created_by, $notify_id, $type, $message){
-    Notification::create([
-        'created_by' => $created_by,
-        'notify_id' => $notify_id,
-        'notify_type' => $type,
-        'message' => $message,
-    ]);
-}
-
-function getNotifications()
-{
-    return Notification::with('hasReadNotification')->orderby('id', 'desc')->get();
-}
-
-function getNotify($notify_id, $notify_type)
-{
-    if($notify_type=='blog'){
-        return Blog::where('id', $notify_id)->first();
-    }elseif($notify_type=='book_interview'){
-        return BookInterview::where('id', $notify_id)->first();
-    }
+function getPartners(){
+    return Partner::where('status', 1)->get();
 }

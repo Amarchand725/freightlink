@@ -40,7 +40,7 @@ class RoleController extends Controller
             return (string) view('admin.role.search', compact('roles'));
         }
         $page_title = 'All Roles';
-        $roles = Role::orderBy('id','DESC')->paginate(10);
+        $roles = Role::orderBy('id','DESC')->where('name', '!=', 'Admin')->paginate(10);
         return view('admin.role.index',compact('roles','page_title'));
     }
 

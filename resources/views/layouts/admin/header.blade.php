@@ -70,15 +70,27 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item btn btn-default btn-flat" href="{{ route('admin.logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                            <i class="bi bi-box-arrow-right"></i> {{ __('Logout') }}
-                        </a>
+                        @if(Auth::user()->hasRole('Admin'))
+                            <a class="dropdown-item btn btn-default btn-flat" href="{{ route('admin.logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                <i class="bi bi-box-arrow-right"></i> {{ __('Logout') }}
+                            </a>
 
-                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @else 
+                            <a class="dropdown-item btn btn-default btn-flat" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                <i class="bi bi-box-arrow-right"></i> {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @endif
                     </li>
                 </ul>
             </li>

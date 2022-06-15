@@ -123,6 +123,9 @@ class PageSettingController extends Controller
         }elseif($slug=='terms'){
             $page_title = ucfirst($slug);
             return view('admin.page_setting.terms', compact("model", "page_data", "page_title"));
+        }elseif($slug=='network'){
+            $page_title = ucfirst($slug);
+            return view('admin.page_setting.network', compact("model", "page_data", "page_title"));
         }else{
             return redirect()->back()->with('error', 'Your page is missing.');
         }

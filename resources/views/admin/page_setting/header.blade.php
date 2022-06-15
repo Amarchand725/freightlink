@@ -37,75 +37,91 @@
 						<div class="box box-info">
 							<div class="box-body">
 								@if(isset($page_data['header_logo']))
-									<div class="form-group">
-										<label for="" class="col-sm-2 control-label">Existing Logo</label>
+									<div class="form-group mt-3">
+										<label for="" class="col-sm-2 control-label">Existing Black Logo</label>
 										<div class="col-sm-9" style="padding-top:6px;">
 											<img src="{{ asset('/public/admin/assets/images/page/'.$page_data['header_logo']) }}" class="existing-photo" style="height:50px;">
 										</div>
 									</div>
 								@endif
-								<div class="form-group">
-									<label for="" class="col-sm-2 control-label">Logo </label>
+								<div class="form-group mt-3">
+									<label for="" class="col-sm-2 control-label">Black Logo </label>
 									<div class="col-sm-9">
 										<input type="file" name="header_logo" class="form-control">
 									</div>
 								</div>
+
+								@if(isset($page_data['header_white_logo']))
+									<div class="form-group mt-3">
+										<label for="" class="col-sm-2 control-label">Existing White Logo</label>
+										<div class="col-sm-9" style="padding-top:6px;">
+											<img src="{{ asset('/public/admin/assets/images/page/'.$page_data['header_white_logo']) }}" class="existing-photo" style="height:50px;">
+										</div>
+									</div>
+								@endif
+								<div class="form-group mt-3">
+									<label for="" class="col-sm-2 control-label">White Logo </label>
+									<div class="col-sm-9">
+										<input type="file" name="header_white_logo" class="form-control">
+									</div>
+								</div>
+
 								@if(isset($page_data['header_favicon']))
-									<div class="form-group">
+									<div class="form-group mt-3">
 										<label for="" class="col-sm-2 control-label">Existing Favicon</label>
 										<div class="col-sm-9" style="padding-top:6px;">
 											<img src="{{ asset('/public/admin/assets/images/page/'.$page_data['header_favicon']) }}" class="existing-photo" style="height:50px;">
 										</div>
 									</div>
 								@endif
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label">Favicon </label>
 									<div class="col-sm-9">
 										<input type="file" name="header_favicon" class="form-control">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label">Alert Top Message </label>
 									<div class="col-sm-9">
-										<input type="text" name="header_alert_message" class="form-control" placeholder="Enter alert top message">
+										<input type="text" name="header_alert_message" value="{{ isset($page_data['header_alert_message'])?$page_data['header_alert_message']:'' }}" class="form-control" placeholder="Enter alert top message">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label">Currency </label>
 									<div class="col-sm-9">
 										<input type="text" name="header_currency" value="{{ isset($page_data['header_currency'])?$page_data['header_currency']:'' }}" class="form-control" placeholder="Enter currency">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label">Symbol </label>
 									<div class="col-sm-9">
 										<input type="text" name="header_currency_symbol" value="{{ isset($page_data['header_currency_symbol'])?$page_data['header_currency_symbol']:'' }}" class="form-control" placeholder="Enter currency symbol">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label">Email </label>
 									<div class="col-sm-9">
 										<input type="email" name="header_email" class="form-control" value="{{ isset($page_data['header_email'])?$page_data['header_email']:'' }}" placeholder="Enter email address">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label">Phone </label>
 									<div class="col-sm-9">
 										<input type="text" name="header_phone" class="form-control" value="{{ isset($page_data['header_phone'])?$page_data['header_phone']:'' }}" placeholder="Enter phone no">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label">Timings </label>
 									<div class="col-sm-5">
 										<label for="">From</label>
 										<input type="time" name="from_time" value="{{ isset($page_data['from_time'])?$page_data['from_time']:'' }}" class="form-control">
 									</div>
-									<div class="col-sm-5">
+									<div class="col-sm-5 mt-3">
 										<label for="">To</label>
 										<input type="time" name="to_time" value="{{ isset($page_data['to_time'])?$page_data['to_time']:'' }}" class="form-control">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mt-3">
 									<label for="" class="col-sm-2 control-label"></label>
 									<div class="col-sm-6">
 										<button type="submit" class="btn btn-primary buttons_green pull-left" name="form_blog">Save</button>

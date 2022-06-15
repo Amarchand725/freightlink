@@ -7,14 +7,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-5 col-lg-5 mx-auto ">
-                    <form action="{{ route('login') }}" method="post">
+                    <form action="{{ route('user.authenticate') }}" method="post">
                         @csrf 
 
-                        <input type="hidden" name="user_type" value="User">
+                        <input type="hidden" name="user_type" value="Company">
                         <span class="text-white join_txt">Log in to Freightlink </span>
                         <div class="row text-center d-flex justify-content-center pt-3">
                             <div class="form-group col-md-8 pb-3">
-                                <input type="email" class="form-control" name id="Email" placeholder="Email">
+                                <input type="email" class="form-control" name='email' id="Email" placeholder="Email">
                                 <span style="color: red">{{ $errors->first('name') }}</span>
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                             <div class="form-group col-md-8 mb-3">
                                 <input type="password" name="password" class="form-control" id="input-password" placeholder="password">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="show-password" name="remember">
+                                    <input class="form-check-input" style="color: white !important" type="checkbox" id="show-password" name="remember">
                                     <label class="form-check-label text-white" style="margin-left: -250px" for="show-password"><small>Show</small></label>
                                 </div>
                                 <span style="color: red">{{ $errors->first('password') }}</span>
@@ -54,7 +54,11 @@
                 </div>
             </div>
             <br><br><br><br>
-            <img src="{{ asset('public/web/assets/img/frieght-imgs/confirm-imges (1).png') }}" alt="conatc-frm" class="img-fluid">
+            <div class="" style="text-align: center">
+                @foreach (getPartners() as $partner)
+                    <img src="{{ asset('public/admin/images/partners') }}/{{ $partner->image }}" style="width:130px; height:50px; margin-left:5px" alt="client-1" class="img-fluid">
+                @endforeach
+            </div>
         </div>
         </section>
     </main>

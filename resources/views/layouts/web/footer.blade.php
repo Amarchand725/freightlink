@@ -16,17 +16,15 @@
             <li><a class="nav-link scrollto" href="#services">Networks</a></li>
             <li><a class="nav-link scrollto " href="#portfolio">Annual Meeting</a></li>
             <li><a class="nav-link scrollto" href="#team">FAQ</a></li>
-            <form id="subscribe-form" class="d-flex" action="{{ route('subscribe.store') }}">
-              @csrf
-
-              <li>
-                <div class="col">
-                  <input type="email" style="color: white" name="email" id="subscriber-email" class="form-control" placeholder="Your Email">
-                  <span style="color: red">{{ $errors->first('email') }}</span>
-                </div>
-              </li>
-              <li><button type="submit" class="nav-link scrollto btn btn-primary text-black subscribe-btn"><b>Subscribe</b></button></li>
-            </form>
+            <li>
+              <div class="col">
+                <input type="email" style="color: white" name="email" id="subscriber-email" class="form-control" placeholder="Your Email">
+                <span style="color: red">{{ $errors->first('email') }}</span>
+              </div>
+            </li>
+            <li>
+              <button type="button" class="nav-link scrollto btn btn-primary text-black subscribe-btn"><b>Subscribe</b></button>
+            </li>
           </ul>
         </nav>
       </div>

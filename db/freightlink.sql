@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2022 at 06:06 PM
+-- Generation Time: Jun 15, 2022 at 05:42 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -31,6 +31,7 @@ CREATE TABLE `benefits` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `created_by` bigint(20) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
@@ -38,6 +39,89 @@ CREATE TABLE `benefits` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `benefits`
+--
+
+INSERT INTO `benefits` (`id`, `created_by`, `title`, `slug`, `description`, `icon`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(3, 1, 'Financial Protection Plan', 'financial-protection-plan', '<p>All paying members of Freghtlink are eligible for our Financial Protection Plan. These members can work with fellow partners confidently and with peace of mind knowing that they are shielded from financial loss.</p>', '14-06-2022-075853.png', 1, NULL, '2022-06-14 02:58:53', '2022-06-14 02:58:53'),
+(4, 1, 'Affiliate Program', 'affiliate-program', '<p>Through our affiliate program our members are able to be part of the development of the network by recommending trusted and professional partners. In so doing, members are able to earn a recurring commission based on the number of successful referrals.</p>', '14-06-2022-080200.png', 1, NULL, '2022-06-14 03:02:00', '2022-06-14 03:02:00'),
+(5, 1, 'Annual Conference', 'annual-conference', '<p>Our conferences are strategically located to enable maximum attendance by our members. The event hosts forwarders from all over the world offering them the chance to meet, greet and strengthen relationships through an agenda full of 1on1 meetings, workshops and social events.</p>', '14-06-2022-080227.png', 1, NULL, '2022-06-14 03:02:27', '2022-06-14 03:02:27'),
+(6, 1, 'Marketing', 'marketing', '<p>Through our strategic partnership we are able to maximise lead generation opportunities by providing online advertising, user-friendly landing pages, reporting tools and integrations with popular CRMs to our members at a competitive rate.</p>', '14-06-2022-080257.png', 1, NULL, '2022-06-14 03:02:57', '2022-06-14 03:02:57'),
+(7, 1, 'Strategic Partnerships', 'strategic-partnerships', '<p>All our members have access to our partners who offer Cargo Insurance, Automated Rate Management and Container Buying and Leasing opportunities. These partners have been carefully selected to aid our members in preparing themselves for a digital future.</p>', '14-06-2022-080316.png', 1, NULL, '2022-06-14 03:03:16', '2022-06-14 03:03:16'),
+(8, 1, 'Mobile App', 'mobile-app', '<p>Network from your phone and connect with members from all over the world with just one click. Designed to improve and streamline all member-to-member communication.<br /><strong>COMING SOON!</strong></p>', '14-06-2022-080340.png', 1, NULL, '2022-06-14 03:03:40', '2022-06-14 03:03:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `connect_expands_possibilities`
+--
+
+CREATE TABLE `connect_expands_possibilities` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `connect_expands_possibilities`
+--
+
+INSERT INTO `connect_expands_possibilities` (`id`, `created_by`, `title`, `slug`, `description`, `logo`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(2, 1, 'Financial Protection Plan', 'financial-protection-plan', '<p>All paying members of Freghtlink are eligible for our Financial Protection Plan. These members can work with fellow partners confidently and with peace of mind knowing that they are shielded from f...</p>', '14-06-2022-100238.png', 1, NULL, '2022-06-14 04:37:22', '2022-06-14 05:02:38'),
+(3, 1, 'Affiliate Program', 'affiliate-program', '<p>Freightlink Network is a network made up of the most professional and trusted forwarders in the industry. The platform allows for relationship building, global opportunities, enhanced advertising strategies and streamlined communications</p>', '14-06-2022-100226.png', 1, NULL, '2022-06-14 04:38:05', '2022-06-14 06:33:05'),
+(4, 1, 'Annual Conference', 'annual-conference', '<p>Our conferences are strategically located to enable maximum attendance by our members. The event hosts forwarders from all over the world offering them the chance to meet, greet and strengthen rela...</p>', '14-06-2022-100216.png', 1, NULL, '2022-06-14 04:39:18', '2022-06-14 05:02:16'),
+(5, 1, 'Marketing', 'marketing', '<p>Through our strategic partnership we are able to maximise lead generation opportunities by providing online advertising, user-friendly landing pages, reporting tools and integrations with popular C...</p>', '14-06-2022-100157.png', 1, NULL, '2022-06-14 04:39:49', '2022-06-14 05:01:57'),
+(6, 1, 'Strategic Partnerships', 'strategic-partnerships', '<p>All our members have access to our partners who offer Cargo Insurance, Automated Rate Management and Container Buying and Leasing opportunities. These partners have been carefully selected to aid o...</p>', '14-06-2022-100145.png', 1, NULL, '2022-06-14 04:40:11', '2022-06-14 05:01:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_us`
+--
+
+CREATE TABLE `contact_us` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `delete_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contact_us`
+--
+
+INSERT INTO `contact_us` (`id`, `first_name`, `last_name`, `company`, `email`, `description`, `status`, `delete_at`, `created_at`, `updated_at`) VALUES
+(1, 'Jesse', 'Yates', 'Delgado Bradford Co', 'lemowyvifi@mailinator.com', 'Neque aute ut invent', 1, NULL, '2022-06-14 07:59:25', '2022-06-14 07:59:25'),
+(2, 'Anika', 'Michael', 'Talley Kennedy Inc', 'kotypuvyha@mailinator.com', 'Velit aperiam ex fug', 1, NULL, '2022-06-14 08:00:03', '2022-06-14 08:00:03'),
+(3, 'Dana', 'Odonnell', 'Hess and Mccoy Co', 'nesahe@mailinator.com', 'Quaerat dolorem quae', 1, NULL, '2022-06-14 08:01:35', '2022-06-14 08:01:35'),
+(4, 'Hadley', 'Banks', 'Bowers Stein Traders', 'xovoxuto@mailinator.com', 'Quo voluptas dolore', 1, NULL, '2022-06-14 08:05:13', '2022-06-14 08:05:13'),
+(5, 'Uriah', 'Noble', 'Mcbride Levy Co', 'tobum@mailinator.com', 'Ex et aliquam itaque', 1, NULL, '2022-06-14 08:09:09', '2022-06-14 08:09:09'),
+(6, 'Sloane', 'Wooten', 'Bradshaw and Stein Trading', 'xilyha@mailinator.com', 'Similique rerum sint', 1, NULL, '2022-06-14 08:12:13', '2022-06-14 08:12:13'),
+(7, 'Solomon', 'Sykes', 'Velazquez and Burgess Co', 'rologoqy@mailinator.com', 'Architecto voluptate', 1, NULL, '2022-06-14 08:16:55', '2022-06-14 08:16:55'),
+(8, 'Sage', 'Bernard', 'Steele Giles Co', 'mygy@mailinator.com', 'Dolor ea autem lorem', 1, NULL, '2022-06-14 08:40:37', '2022-06-14 08:40:37'),
+(9, 'Erasmus', 'Vargas', 'Harrington Oneal LLC', 'vufiviti@mailinator.com', 'Aliqua Temporibus d', 1, NULL, '2022-06-14 08:42:17', '2022-06-14 08:42:17'),
+(10, 'Keefe', 'Adams', 'Tucker Vang Inc', 'wixari@mailinator.com', 'In quo totam volupta', 1, NULL, '2022-06-14 08:44:07', '2022-06-14 08:44:07'),
+(11, 'Jennifer', 'Acevedo', 'Golden Anthony Trading', 'qafepeci@mailinator.com', 'Totam sunt ea commod', 1, NULL, '2022-06-14 08:46:39', '2022-06-14 08:46:39'),
+(12, 'Beatrice', 'Riddle', 'Waller and Kramer Associates', 'xuvyf@mailinator.com', 'Et adipisicing vel c', 1, NULL, '2022-06-14 08:49:51', '2022-06-14 08:49:51'),
+(13, 'Quon', 'Mercer', 'Baldwin Macias Inc', 'zaxahy@mailinator.com', 'Id ea in quis praes', 1, NULL, '2022-06-14 08:57:04', '2022-06-14 08:57:04'),
+(14, 'Shaeleigh', 'Saunders', 'Burns and Cochran Traders', 'ruwetebun@mailinator.com', 'Consectetur similiq', 1, NULL, '2022-06-14 08:58:31', '2022-06-14 08:58:31'),
+(15, 'Mira', 'Hall', 'Britt and Jefferson Traders', 'bozacoc@mailinator.com', 'Qui fugiat modi fugi', 1, NULL, '2022-06-14 09:00:51', '2022-06-14 09:00:51'),
+(16, 'Daryl', 'Mcgowan', 'Joyner and Fields Plc', 'qajem@mailinator.com', 'Aut dolor sed laudan', 1, NULL, '2022-06-14 09:12:06', '2022-06-14 09:12:06');
 
 -- --------------------------------------------------------
 
@@ -54,6 +138,34 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faqs`
+--
+
+CREATE TABLE `faqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `question` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faqs`
+--
+
+INSERT INTO `faqs` (`id`, `created_by`, `question`, `answer`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(2, 1, 'Non consectetur a erat nam at lectus urna duis?', '<p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>', 1, NULL, '2022-06-14 09:49:49', '2022-06-14 09:49:49'),
+(3, 1, 'Feugiat scelerisque varius morbi enim nunc?', '<p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>', 1, NULL, '2022-06-14 09:50:09', '2022-06-14 09:50:09'),
+(4, 1, 'Dolor sit amet consectetur adipiscing elit?', '<p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>', 1, NULL, '2022-06-14 09:50:29', '2022-06-14 09:50:29'),
+(5, 1, 'Tempus quam pellentesque nec nam aliquam sem et tortor consequat?', '<p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.</p>', 1, NULL, '2022-06-14 09:50:45', '2022-06-14 09:50:45'),
+(6, 1, 'Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor?', '<p>Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.</p>', 1, NULL, '2022-06-14 09:51:02', '2022-06-14 09:51:02');
 
 -- --------------------------------------------------------
 
@@ -105,7 +217,17 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2022_06_09_105851_create_permission_tables', 1),
 (9, '2022_06_13_120719_create_partners_table', 2),
-(10, '2022_06_13_154022_create_benefits_table', 3);
+(10, '2022_06_13_154022_create_benefits_table', 3),
+(12, '2022_06_14_082205_create_connect_expands_possibilities_table', 4),
+(13, '2022_02_03_080357_create_settings_table', 5),
+(14, '2022_02_03_082221_create_sliders_table', 5),
+(15, '2022_02_03_082236_create_testimonials_table', 5),
+(16, '2022_02_03_082316_create_services_table', 5),
+(17, '2022_03_09_150411_create_teams_table', 5),
+(18, '2022_03_09_150554_create_packages_table', 5),
+(19, '2022_06_14_124755_create_contact_us_table', 6),
+(22, '2022_06_14_141838_create_faqs_table', 7),
+(23, '2022_06_08_150214_create_subscribers_table', 8);
 
 -- --------------------------------------------------------
 
@@ -136,7 +258,28 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\User', 1);
+(1, 'App\\Models\\User', 1),
+(2, 'App\\Models\\User', 11);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `packages`
+--
+
+CREATE TABLE `packages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `is_featured` tinyint(1) NOT NULL DEFAULT 0,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -169,7 +312,8 @@ INSERT INTO `pages` (`id`, `created_by`, `title`, `slug`, `description`, `meta_t
 (3, 1, 'Footer', 'footer', NULL, NULL, NULL, NULL, 1, NULL, '2022-06-10 08:54:57', '2022-06-10 08:54:57'),
 (4, 1, 'Terms', 'terms', NULL, NULL, NULL, NULL, 1, NULL, '2022-06-10 08:55:17', '2022-06-10 08:55:17'),
 (5, 1, 'About', 'about', NULL, NULL, NULL, NULL, 1, NULL, '2022-06-10 08:55:37', '2022-06-10 08:55:37'),
-(6, 1, 'Contact', 'contact', NULL, NULL, NULL, NULL, 1, NULL, '2022-06-10 08:55:44', '2022-06-10 08:55:44');
+(6, 1, 'Contact', 'contact', NULL, NULL, NULL, NULL, 1, NULL, '2022-06-10 08:55:44', '2022-06-10 08:55:44'),
+(7, 1, 'Network', 'network', NULL, NULL, NULL, NULL, 1, NULL, '2022-06-14 06:37:51', '2022-06-14 06:37:51');
 
 -- --------------------------------------------------------
 
@@ -198,7 +342,7 @@ INSERT INTO `page_settings` (`id`, `parent_slug`, `key`, `value`, `created_at`, 
 (5, 'home', 'home_section', '1', '2022-06-10 09:10:25', '2022-06-10 09:10:25'),
 (6, 'home', 'form_home_blog', NULL, '2022-06-10 09:10:25', '2022-06-10 09:10:25'),
 (7, 'home', 'home_background_image', '10062022141025.png', '2022-06-10 09:10:25', '2022-06-10 09:10:25'),
-(8, 'header', '_token', 'K98b7ctipEgwsJxPu3NcIwLjov5K9uXsMZgqUIhr', '2022-06-10 09:20:50', '2022-06-10 09:20:50'),
+(8, 'header', '_token', 'nkJiQRdGRqNI9ZJVGcAaHJT9I6IKfCzi7E2uNG3C', '2022-06-10 09:20:50', '2022-06-14 07:05:39'),
 (9, 'header', 'parent_slug', 'header', '2022-06-10 09:20:50', '2022-06-10 09:20:50'),
 (10, 'header', 'header_currency', 'Dollar', '2022-06-10 09:20:50', '2022-06-10 09:20:50'),
 (11, 'header', 'header_currency_symbol', '$', '2022-06-10 09:20:50', '2022-06-10 09:20:50'),
@@ -223,15 +367,15 @@ INSERT INTO `page_settings` (`id`, `parent_slug`, `key`, `value`, `created_at`, 
 (30, 'footer', 'footer_address', NULL, '2022-06-10 09:26:16', '2022-06-10 09:26:16'),
 (31, 'footer', 'footer_description', NULL, '2022-06-10 09:26:16', '2022-06-10 09:26:16'),
 (32, 'footer', 'form_blog', NULL, '2022-06-10 09:26:16', '2022-06-10 09:26:16'),
-(33, 'contact', '_token', 'K98b7ctipEgwsJxPu3NcIwLjov5K9uXsMZgqUIhr', '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
+(33, 'contact', '_token', 'nkJiQRdGRqNI9ZJVGcAaHJT9I6IKfCzi7E2uNG3C', '2022-06-10 09:27:25', '2022-06-14 07:30:02'),
 (34, 'contact', 'parent_slug', 'contact', '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
-(35, 'contact', 'contact_heading', 'Contact us 7/24', '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
+(35, 'contact', 'contact_heading', 'How can we help you?', '2022-06-10 09:27:25', '2022-06-14 07:38:37'),
 (36, 'contact', 'contact_address', 'lorem ipsum', '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
-(37, 'contact', 'contact_email', 'contact@mail.com', '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
+(37, 'contact', 'contact_email', 'info@freightlinknetworks.com', '2022-06-10 09:27:25', '2022-06-14 07:40:39'),
 (38, 'contact', 'contact_phone', '123455555', '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
 (39, 'contact', 'contact_map', NULL, '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
 (40, 'contact', 'form_contact', NULL, '2022-06-10 09:27:25', '2022-06-10 09:27:25'),
-(41, 'header', 'header_alert_message', 'Join our Affiliate Program and earn up to $500 per referral.', '2022-06-10 09:40:55', '2022-06-10 09:40:55'),
+(41, 'header', 'header_alert_message', 'Join our Affiliate Program and earn up to $500 per referral.', '2022-06-10 09:40:55', '2022-06-14 07:16:29'),
 (42, 'about', '_token', 'N0b337FiWxOAdDpVPGeydG980kD20NgrAQehh9xR', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
 (43, 'about', 'parent_slug', 'about', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
 (44, 'about', 'about_heading', 'GLOBAL NETWORK', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
@@ -244,7 +388,17 @@ INSERT INTO `page_settings` (`id`, `parent_slug`, `key`, `value`, `created_at`, 
 (51, 'about', 'about_status', '1', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
 (52, 'about', 'form_about', NULL, '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
 (53, 'about', 'about_side_image', '1306202215302362a7580fa9013.png', '2022-06-13 10:30:23', '2022-06-13 10:30:23'),
-(54, 'about', 'about_bellow_label', 'Why The Best Companies Choose Freightlink.', '2022-06-13 10:37:24', '2022-06-13 10:37:24');
+(54, 'about', 'about_bellow_label', 'Why The Best Companies Choose Freightlink.', '2022-06-13 10:37:24', '2022-06-13 10:37:24'),
+(55, 'network', '_token', 'nkJiQRdGRqNI9ZJVGcAaHJT9I6IKfCzi7E2uNG3C', '2022-06-14 06:43:55', '2022-06-14 06:43:55'),
+(56, 'network', 'parent_slug', 'network', '2022-06-14 06:43:55', '2022-06-14 06:43:55'),
+(57, 'network', 'network_heading', 'BENEFITS', '2022-06-14 06:43:55', '2022-06-14 06:43:55'),
+(58, 'network', 'network_title', 'Connecting Expands Possibilities.', '2022-06-14 06:43:55', '2022-06-14 06:43:55'),
+(59, 'network', 'network_description', '<p class=\"aos-init aos-animate text-white\" data-aos=\"fade-up\">Freightlink Networks brings together trusted and respected logistics specialists from all over the world by offering an environment for freight forwarders to exchange business and find reliable partners in various different niche markets.</p>\r\n<p class=\"aos-init aos-animate text-white\" data-aos=\"fade-up\">By joining Freighlink you will have access to all members across the 5 networks, allowing you to strengthen your service offerings while still be financially protected under the Financial Protection Plan.</p>', '2022-06-14 06:43:55', '2022-06-14 06:43:55'),
+(60, 'network', 'network_status', '1', '2022-06-14 06:43:55', '2022-06-14 06:43:55'),
+(61, 'network', 'form_about', NULL, '2022-06-14 06:43:55', '2022-06-14 06:43:55'),
+(62, 'header', 'header_white_logo', '14062022120539.png', '2022-06-14 07:05:39', '2022-06-14 07:05:39'),
+(63, 'contact', 'contact_home_page_label', 'Dates to the next Freightlink Meeting in <br > 2023 are to be announced soon.', '2022-06-14 07:30:02', '2022-06-14 07:32:04'),
+(64, 'contact', 'contact_description', 'Need to get in touch with us? Either fill out the form with your <br />\r\ninquiry or email us directly at', '2022-06-14 07:30:02', '2022-06-14 07:39:40');
 
 -- --------------------------------------------------------
 
@@ -345,6 +499,7 @@ CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -353,8 +508,10 @@ CREATE TABLE `roles` (
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'web', '2022-06-09 06:05:13', '2022-06-09 06:05:13');
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'web', NULL, '2022-06-09 06:05:13', '2022-06-09 06:05:13'),
+(2, 'Company', 'web', 'Lorem ipsum', '2022-06-15 04:52:53', '2022-06-15 04:52:53'),
+(3, 'User', 'web', 'Lorem ipsum', '2022-06-15 04:55:51', '2022-06-15 04:55:51');
 
 -- --------------------------------------------------------
 
@@ -373,13 +530,183 @@ CREATE TABLE `role_has_permissions` (
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
+(1, 3),
 (2, 1),
 (3, 1),
+(3, 2),
 (4, 1),
 (5, 1),
 (6, 1),
 (7, 1),
 (8, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `photo_logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo_favicon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `top_bar_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `top_bar_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_col1_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_col2_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_col3_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_col4_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_copyright` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_address` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_recent_news_item` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_recent_portfolio_item` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `newsletter_text` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cta_text` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cta_button_text` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cta_button_url` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cta_background_photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `send_email_from` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `receive_email_to` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo4` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo5` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo6` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo7` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo8` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo9` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo10` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo11` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo12` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo13` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo14` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo15` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_total_recent_post` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_news_heading_category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_news_heading_recent_post` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_total_upcoming_event` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_total_past_event` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_event_heading_upcoming` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_event_heading_past` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_service_heading_service` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_service_heading_quick_contact` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_portfolio_heading_project_detail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sidebar_portfolio_heading_quick_contact` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `front_end_color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `service_id` bigint(20) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscribers`
+--
+
+CREATE TABLE `subscribers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `name`, `email`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'test@user.com', 1, NULL, '2022-06-14 10:37:11', '2022-06-14 10:37:11'),
+(2, NULL, 'teste22@gmail.com', 1, NULL, '2022-06-14 10:37:41', '2022-06-14 10:37:41'),
+(3, NULL, 'chandamar725@gmail.com', 1, NULL, '2022-06-14 10:43:05', '2022-06-14 10:43:05'),
+(4, NULL, 'superadmin@example.com', 1, NULL, '2022-06-15 03:13:41', '2022-06-15 03:13:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teams`
+--
+
+CREATE TABLE `teams` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `designation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter_link` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook_link` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram_link` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkedin_link` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimonials`
+--
+
+CREATE TABLE `testimonials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `designation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -390,11 +717,9 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `referral_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `promo_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `temprary_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -403,6 +728,10 @@ CREATE TABLE `users` (
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `verify_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -412,8 +741,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `referral_code`, `name`, `last_name`, `phone`, `promo_code`, `email`, `temprary_email`, `email_verified_at`, `password`, `remember_token`, `status`, `verify_token`, `image`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, '4046', 'BG7kf4qV', 'Hardik', '', '', '', 'chandamar725@gmail.com', NULL, NULL, '$2y$10$TrSMTkdqZ4CkZe8zLOz/AuMG5CYt3vVpO4dHwUN.ecPMsAorlD416', NULL, 1, NULL, NULL, NULL, NULL, '2022-06-13 06:16:17');
+INSERT INTO `users` (`id`, `user_id`, `name`, `last_name`, `phone`, `email`, `temprary_email`, `email_verified_at`, `password`, `remember_token`, `status`, `verify_token`, `image`, `company_name`, `website`, `country`, `city`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, '4046', 'Hardik', '', '', 'admin@gmail.com', NULL, NULL, '$2y$10$TrSMTkdqZ4CkZe8zLOz/AuMG5CYt3vVpO4dHwUN.ecPMsAorlD416', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-13 06:16:17'),
+(11, '3639', 'Kirby Terrell', NULL, NULL, 'chandamar725@gmail.com', NULL, NULL, '$2y$10$yFyUN7Xcu6QiFV1e7neGDeDmR9OIVN1hVdgSyhOPo.L5QWsg3sy/W', NULL, 1, NULL, NULL, 'Castro Mccormick Plc', 'https://www.rudepusiba.com.au', 'Enim rerum eligendi', 'Ut debitis illo quam', NULL, '2022-06-15 07:57:04', '2022-06-15 07:57:04');
 
 --
 -- Indexes for dumped tables
@@ -426,11 +756,29 @@ ALTER TABLE `benefits`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `connect_expands_possibilities`
+--
+ALTER TABLE `connect_expands_possibilities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact_us`
+--
+ALTER TABLE `contact_us`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `faqs`
+--
+ALTER TABLE `faqs`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `mail_settings`
@@ -457,6 +805,12 @@ ALTER TABLE `model_has_permissions`
 ALTER TABLE `model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `packages`
+--
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `pages`
@@ -512,6 +866,42 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subscribers`
+--
+ALTER TABLE `subscribers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teams`
+--
+ALTER TABLE `teams`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -526,13 +916,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `benefits`
 --
 ALTER TABLE `benefits`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `connect_expands_possibilities`
+--
+ALTER TABLE `connect_expands_possibilities`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `contact_us`
+--
+ALTER TABLE `contact_us`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `faqs`
+--
+ALTER TABLE `faqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `mail_settings`
@@ -544,19 +952,25 @@ ALTER TABLE `mail_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `page_settings`
 --
 ALTER TABLE `page_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `partners`
@@ -580,13 +994,49 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `subscribers`
+--
+ALTER TABLE `subscribers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `teams`
+--
+ALTER TABLE `teams`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
