@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2022 at 05:42 PM
+-- Generation Time: Jun 16, 2022 at 05:33 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -51,6 +51,48 @@ INSERT INTO `benefits` (`id`, `created_by`, `title`, `slug`, `description`, `ico
 (6, 1, 'Marketing', 'marketing', '<p>Through our strategic partnership we are able to maximise lead generation opportunities by providing online advertising, user-friendly landing pages, reporting tools and integrations with popular CRMs to our members at a competitive rate.</p>', '14-06-2022-080257.png', 1, NULL, '2022-06-14 03:02:57', '2022-06-14 03:02:57'),
 (7, 1, 'Strategic Partnerships', 'strategic-partnerships', '<p>All our members have access to our partners who offer Cargo Insurance, Automated Rate Management and Container Buying and Leasing opportunities. These partners have been carefully selected to aid our members in preparing themselves for a digital future.</p>', '14-06-2022-080316.png', 1, NULL, '2022-06-14 03:03:16', '2022-06-14 03:03:16'),
 (8, 1, 'Mobile App', 'mobile-app', '<p>Network from your phone and connect with members from all over the world with just one click. Designed to improve and streamline all member-to-member communication.<br /><strong>COMING SOON!</strong></p>', '14-06-2022-080340.png', 1, NULL, '2022-06-14 03:03:40', '2022-06-14 03:03:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `companies`
+--
+
+CREATE TABLE `companies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `new_member` tinyint(1) NOT NULL DEFAULT 0,
+  `suspended` tinyint(1) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `on_website` tinyint(1) NOT NULL DEFAULT 0,
+  `enrollment_date` date NOT NULL,
+  `expire_date` date NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profile` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_networks`
+--
+
+CREATE TABLE `company_networks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) NOT NULL,
+  `network_id` bigint(20) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -122,6 +164,23 @@ INSERT INTO `contact_us` (`id`, `first_name`, `last_name`, `company`, `email`, `
 (14, 'Shaeleigh', 'Saunders', 'Burns and Cochran Traders', 'ruwetebun@mailinator.com', 'Consectetur similiq', 1, NULL, '2022-06-14 08:58:31', '2022-06-14 08:58:31'),
 (15, 'Mira', 'Hall', 'Britt and Jefferson Traders', 'bozacoc@mailinator.com', 'Qui fugiat modi fugi', 1, NULL, '2022-06-14 09:00:51', '2022-06-14 09:00:51'),
 (16, 'Daryl', 'Mcgowan', 'Joyner and Fields Plc', 'qajem@mailinator.com', 'Aut dolor sed laudan', 1, NULL, '2022-06-14 09:12:06', '2022-06-14 09:12:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `downloads`
+--
+
+CREATE TABLE `downloads` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -227,7 +286,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2022_03_09_150554_create_packages_table', 5),
 (19, '2022_06_14_124755_create_contact_us_table', 6),
 (22, '2022_06_14_141838_create_faqs_table', 7),
-(23, '2022_06_08_150214_create_subscribers_table', 8);
+(23, '2022_06_08_150214_create_subscribers_table', 8),
+(25, '2022_06_16_084329_create_downloads_table', 9),
+(27, '2022_06_16_111500_create_company_networks_table', 11),
+(28, '2022_06_16_105328_create_companies_table', 12),
+(29, '2022_06_16_130804_create_networks_table', 13);
 
 -- --------------------------------------------------------
 
@@ -260,6 +323,38 @@ CREATE TABLE `model_has_roles` (
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
 (2, 'App\\Models\\User', 11);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `networks`
+--
+
+CREATE TABLE `networks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `black_bg_logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `white_bg_logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `networks`
+--
+
+INSERT INTO `networks` (`id`, `created_by`, `title`, `slug`, `color`, `description`, `black_bg_logo`, `white_bg_logo`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Strategic Partnerships', 'strategic-partnerships', '#046c1e', '<p>All our members have access to our partners who offer Cargo Insurance, Automated Rate Management and Container Buying and Leasing opportunities. These partners have been carefully selected to aid o...</p>', '16-06-2022-14223562ab3cab4abea.png', '16-06-2022-14223562ab3cab4a6a6.png', 1, NULL, '2022-06-16 09:22:35', '2022-06-16 09:35:21'),
+(2, 1, 'Marketing', 'marketing', '#9011d4', '<p>Through our strategic partnership we are able to maximise lead generation opportunities by providing online advertising, user-friendly landing pages, reporting tools and integrations with popular C...</p>', '16-06-2022-14395862ab40be133ab.png', '16-06-2022-14395862ab40be11f9c.png', 1, NULL, '2022-06-16 09:39:58', '2022-06-16 09:39:58'),
+(3, 1, 'Annual Conference', 'annual-conference', '#da0101', '<p>Our conferences are strategically located to enable maximum attendance by our members. The event hosts forwarders from all over the world offering them the chance to meet, greet and strengthen rela...</p>', '16-06-2022-14405062ab40f27a542.png', '16-06-2022-14405062ab40f27a08b.png', 1, NULL, '2022-06-16 09:40:50', '2022-06-16 09:40:50'),
+(4, 1, 'Affiliate Program', 'affiliate-program', '#0fbbe6', '<p>Freightlink Network is a network made up of the most professional and trusted forwarders in the industry. The platform allows for relationship building, global opportunities, enhanced advertising strategies and streamlined communications</p>', '16-06-2022-14413762ab4121e5f43.png', '16-06-2022-14413762ab4121e5b78.png', 1, NULL, '2022-06-16 09:41:37', '2022-06-16 09:41:37'),
+(5, 1, 'Financial Protection Plan', 'financial-protection-plan', '#e4c00c', '<p>All paying members of Freghtlink are eligible for our Financial Protection Plan. These members can work with fellow partners confidently and with peace of mind knowing that they are shielded from f...</p>', '16-06-2022-14421962ab414b933a8.png', '16-06-2022-14421962ab414b92f7c.png', 1, NULL, '2022-06-16 09:42:19', '2022-06-16 09:42:19');
 
 -- --------------------------------------------------------
 
@@ -756,6 +851,18 @@ ALTER TABLE `benefits`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `companies`
+--
+ALTER TABLE `companies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `company_networks`
+--
+ALTER TABLE `company_networks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `connect_expands_possibilities`
 --
 ALTER TABLE `connect_expands_possibilities`
@@ -765,6 +872,12 @@ ALTER TABLE `connect_expands_possibilities`
 -- Indexes for table `contact_us`
 --
 ALTER TABLE `contact_us`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `downloads`
+--
+ALTER TABLE `downloads`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -805,6 +918,12 @@ ALTER TABLE `model_has_permissions`
 ALTER TABLE `model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `networks`
+--
+ALTER TABLE `networks`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `packages`
@@ -919,6 +1038,18 @@ ALTER TABLE `benefits`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `companies`
+--
+ALTER TABLE `companies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `company_networks`
+--
+ALTER TABLE `company_networks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `connect_expands_possibilities`
 --
 ALTER TABLE `connect_expands_possibilities`
@@ -929,6 +1060,12 @@ ALTER TABLE `connect_expands_possibilities`
 --
 ALTER TABLE `contact_us`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `downloads`
+--
+ALTER TABLE `downloads`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -952,7 +1089,13 @@ ALTER TABLE `mail_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `networks`
+--
+ALTER TABLE `networks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `packages`

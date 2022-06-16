@@ -13,7 +13,7 @@
         <li><a class="nav-link scrollto {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a></li>
         <li><a class="nav-link scrollto {{ request()->is('about-us') ? 'active' : '' }}" href="{{ route('about-us') }}">About Us</a></li>
         <li><a class="nav-link scrollto {{ request()->is('benefits') ? 'active' : '' }}" href="{{ route('benefits') }}">Benefits</a></li>
-        <li><a class="nav-link scrollto {{ request()->is('network') ? 'active' : '' }}" href="{{ route('network') }}">Networks</a></li>
+        <li><a class="nav-link scrollto {{ request()->is('networks') ? 'active' : '' }}" href="{{ route('networks') }}">Networks</a></li>
         <li><a class="nav-link scrollto {{ request()->is('benefit') || request()->is('benefit/*') ? 'active' : '' }}" href="#portfolio">Annual Meeting</a></li>
         <li><a class="nav-link scrollto {{ request()->is('faqs') ? 'active' : '' }}" href="{{ route('faqs') }}">FAQ</a></li>
         <li><a class="nav-link scrollto {{ request()->is('pricing') ? 'active' : '' }}" href="#pricing">Pricing</a></li>

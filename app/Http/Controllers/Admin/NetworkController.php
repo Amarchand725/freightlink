@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ConnectExpandsPossibility;
+use App\Models\Network;
 use Illuminate\Http\Request;
 use Auth;
 
-class ConnectExpandsPossibilityController extends Controller
+class NetworkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class ConnectExpandsPossibilityController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $query = ConnectExpandsPossibility::orderby('id', 'desc')->where('id', '>', 0);
+            $query = Network::orderby('id', 'desc')->where('id', '>', 0);
             if($request['search'] != ""){
                 $query->where('name', 'like', '%'. $request['search'] .'%')
                     ->orWhere('price', 'like', '%'. $request['search'] .'%');
@@ -32,7 +32,7 @@ class ConnectExpandsPossibilityController extends Controller
             return (string) view('admin.network.search', compact('models'));
         }
         $page_title = 'All Networks';
-        $models = ConnectExpandsPossibility::orderby('id', 'desc')->paginate(10);
+        $models = Network::orderby('id', 'desc')->paginate(10);
         return View('admin.network.index', compact("models", "page_title"));
     }
 
@@ -56,40 +56,41 @@ class ConnectExpandsPossibilityController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'title' => 'required|unique:connect_expands_possibilities,title',
+            'title' => 'required|unique:networks,title',
             'description' => 'max:500',
         ]);
 
-        $model = new ConnectExpandsPossibility();
+        $model = new Network();
 
         if (isset($request->white_bg_logo)) {
-            $white_bg_logo = date('d-m-Y-His').'.'.$request->file('white_bg_logo')->getClientOriginalExtension();
-            $request->white_bg_logo->move(public_path('/admin/images/expands_possilities'), $white_bg_logo);
+            $white_bg_logo = date('d-m-Y-His').uniqid().'.'.$request->file('white_bg_logo')->getClientOriginalExtension();
+            $request->white_bg_logo->move(public_path('/admin/images/networks'), $white_bg_logo);
             $model->white_bg_logo = $white_bg_logo;
         }
 
         if (isset($request->black_bg_logo)) {
-            $black_bg_logo = date('d-m-Y-His').'.'.$request->file('black_bg_logo')->getClientOriginalExtension();
-            $request->black_bg_logo->move(public_path('/admin/images/expands_possilities'), $black_bg_logo);
+            $black_bg_logo = date('d-m-Y-His').uniqid().'.'.$request->file('black_bg_logo')->getClientOriginalExtension();
+            $request->black_bg_logo->move(public_path('/admin/images/networks'), $black_bg_logo);
             $model->black_bg_logo = $black_bg_logo;
         }
 
         $model->created_by = Auth::user()->id;
         $model->title = $request->title;
         $model->slug = \Str::slug($request->title);
+        $model->color = $request->color;
         $model->description = $request->description;
         $model->save();
 
-        return redirect()->route('network.index')->with('message', 'Expands Possibility Added Successfully !');
+        return redirect()->route('network.index')->with('message', 'Network Added Successfully !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ConnectExpandsPossibility  $connectExpandsPossibility
+     * @param  \App\Models\Network  $network
      * @return \Illuminate\Http\Response
      */
-    public function show(ConnectExpandsPossibility $connectExpandsPossibility)
+    public function show(Network $network)
     {
         //
     }
@@ -97,13 +98,13 @@ class ConnectExpandsPossibilityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ConnectExpandsPossibility  $connectExpandsPossibility
+     * @param  \App\Models\Network  $network
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $page_title = 'Edit Network';
-        $model = ConnectExpandsPossibility::where('id', $id)->first();
+        $model = Network::where('id', $id)->first();
         return View('admin.network.edit', compact("model","page_title"));
     }
 
@@ -111,7 +112,7 @@ class ConnectExpandsPossibilityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ConnectExpandsPossibility  $connectExpandsPossibility
+     * @param  \App\Models\Network  $network
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -120,33 +121,40 @@ class ConnectExpandsPossibilityController extends Controller
             'description' => 'max:500',
         ]);
 
-        $connectExpandsPossibility = ConnectExpandsPossibility::where('id', $id)->first();
+        $model = Network::where('id', $id)->first();
 
-        if (isset($request->image)) {
-            $image = date('d-m-Y-His').'.'.$request->file('image')->getClientOriginalExtension();
-            $request->image->move(public_path('/admin/images/expands_possilities'), $image);
-            $connectExpandsPossibility->logo = $image;
+        if (isset($request->white_bg_logo)) {
+            $white_bg_logo = date('d-m-Y-His').uniqid().'.'.$request->file('white_bg_logo')->getClientOriginalExtension();
+            $request->white_bg_logo->move(public_path('/admin/images/networks'), $white_bg_logo);
+            $model->white_bg_logo = $white_bg_logo;
         }
 
-        $connectExpandsPossibility->created_by = Auth::user()->id;
-        $connectExpandsPossibility->title = $request->title;
-        $connectExpandsPossibility->description = $request->description;
-        $connectExpandsPossibility->save();
+        if (isset($request->black_bg_logo)) {
+            $black_bg_logo = date('d-m-Y-His').uniqid().'.'.$request->file('black_bg_logo')->getClientOriginalExtension();
+            $request->black_bg_logo->move(public_path('/admin/images/networks'), $black_bg_logo);
+            $model->black_bg_logo = $black_bg_logo;
+        }
 
-        return redirect()->route('network.index')->with('message', 'Expands Possibility Updated Successfully !');
+        $model->created_by = Auth::user()->id;
+        $model->title = $request->title;
+        $model->color = $request->color;
+        $model->description = $request->description;
+        $model->save();
+
+        return redirect()->route('network.index')->with('message', 'Network Updated Successfully !');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ConnectExpandsPossibility  $connectExpandsPossibility
+     * @param  \App\Models\Network  $network
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy($id)
     {
-        $connectExpandsPossibility = ConnectExpandsPossibility::where('slug', $slug)->first();
-        if ($connectExpandsPossibility) {
-            $connectExpandsPossibility->delete();
+        $model = Network::where('id', $id)->first();
+        if ($model) {
+            $model->delete();
             return true;
         } else {
             return response()->json(['message' => 'Failed '], 404);

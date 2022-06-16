@@ -30,33 +30,65 @@
 		<section class="section dashboard">
 			<div class="row">
 				<div class="col-md-12">
-					<form action="{{ route('expands_possibility.store') }}" id="regform" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+					<form action="{{ route('network.update', $model->id) }}" id="regform" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 						@csrf
+						{{ method_field('PATCH') }}
 						<div class="box box-info">
 							<div class="box-body">
 								<div class="form-group mb-3">
 									<label for="" class="col-sm-2 control-label">Title <span style="color: red">*</span></label>
 									<div class="col-sm-9">
-										<input type="text" autocomplete="off" class="form-control" name="title" value="{{ old('title') }}" placeholder="Enter company title">
+										<input type="text" autocomplete="off" class="form-control" name="title" value="{{ $model->title }}" placeholder="Enter company title">
 										<span style="color: red">{{ $errors->first('title') }}</span>
+									</div>
+								</div>
+								<div class="form-group mb-3">
+									<label for="" class="col-sm-2 control-label">Color <span style="color: red">*</span></label>
+									<div class="col-sm-1">
+										<input type="color" autocomplete="off" class="form-control" name="color" value="{{ $model->color }}" placeholder="Enter company color">
+										<span style="color: red">{{ $errors->first('color') }}</span>
 									</div>
 								</div>
 								<div class="form-group mb-3">
 									<label for="" class="col-sm-2 control-label">Description </label>
 									<div class="col-sm-9">
-										<textarea class="form-control texteditor" name="description" style="height:200px;" placeholder="Enter description">{{ old('description') }}</textarea>
+										<textarea class="form-control texteditor" name="description" style="height:200px;" placeholder="Enter description">{{ $model->description }}</textarea>
 										<span style="color: red">{{ $errors->first('description') }}</span>
 									</div>
 								</div>
-								
 								<div class="form-group mb-3">
-									<label for="" class="col-sm-2 control-label">Logo <span style="color: red">*</span></label>
-									<div class="col-sm-9">
-										<input type="file" class="form-control" name="image">
-										<span style="color: red">{{ $errors->first('description') }}</span>
+									<label for="" class="control-label">White Background Logo <span style="color: red">*</span></label>
+									<div class="col-sm-9" style="padding-top:5px">
+										@if(!empty($model->white_bg_logo))
+											<img src="{{ asset('public/admin/images/networks') }}/{{ $model->white_bg_logo }}" alt="Preview" id="white_bg_preview" height="55px" width="30%">
+										@else 
+											<img src="{{ asset('public/admin/assets/img/frieght-imgs/upload_btn.png') }}" alt="Preview" id="white_bg_preview" height="55px" width="30%">
+										@endif
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mb-3">
+									<div class="col-sm-9">
+										<input type="file" class="form-control" id="white_bg_logo" name="white_bg_logo">
+										<span style="color: red">{{ $errors->first('white_bg_logo') }}</span>
+									</div>
+								</div>
+								<div class="form-group mb-3">
+									<label for="" class="control-label">Black Background Logo <span style="color: red">*</span></label>
+									<div class="col-sm-9" style="padding-top:5px">
+										@if(!empty($model->black_bg_logo))
+											<img src="{{ asset('public/admin/images/networks') }}/{{ $model->black_bg_logo }}" alt="Preview" id="black_bg_preview" height="55px" width="30%">
+										@else 
+											<img src="{{ asset('public/admin/assets/img/frieght-imgs/upload_btn.png') }}" alt="Preview" id="black_bg_preview" height="55px" width="30%">
+										@endif
+									</div>
+								</div>
+								<div class="form-group mb-3">
+									<div class="col-sm-9">
+										<input type="file" class="form-control" id="black_bg_logo" name="black_bg_logo">
+										<span style="color: red">{{ $errors->first('black_bg_logo') }}</span>
+									</div>
+								</div>
+								<div class="form-group mb-3">
 									<label for="" class="col-sm-2 control-label"></label>
 									<div class="col-sm-9">
 										<button type="submit" class="btn btn-primary buttons_green pull-left" name="form1">Save</button>

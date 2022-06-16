@@ -15,7 +15,7 @@
         <!-- End Dashboard Nav -->
         @if(Auth::check() && Auth::user()->hasRole('Admin'))
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('user') || request()->is('user/*') ? 'active' : '' }}" href="{{ route('user.index') }}">
+                <a class="nav-link {{ request()->is('company') || request()->is('company/*') ? 'active' : '' }}" href="{{ route('company.index') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/companies-p.png') }}" alt="dashboard" class="img-fluid">
                     <span> &nbsp; Companies</span>
                 </a>
@@ -46,7 +46,13 @@
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('expands_possibility') || request()->is('expands_possibility/*') ? 'active' : '' }}" href="{{ route('expands_possibility.index') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
-                    <span> &nbsp; Expands Possibilities</span>
+                    <span> &nbsp; Networks</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('network') || request()->is('network/*') ? 'active' : '' }}" href="{{ route('network.index') }}">
+                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
+                    <span> &nbsp; Networks</span>
                 </a>
             </li>
 
@@ -59,7 +65,7 @@
             <!-- End Forms Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link {{ request()->is('download') || request()->is('download/*') ? 'active' : '' }}" href="{{ route('download.index') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/download-ic.png') }}" alt="dashboard" class="img-fluid">
                     <span> &nbsp; Downloads</span>
                 </a>
@@ -129,7 +135,7 @@
             <!-- End Components Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link collapsed" href="{{ route('downloads.index') }}">
                 <img src="{{ asset('public/admin/assets/img/frieght-imgs/download-ic.png') }}" alt="user" class="img-fluid">
                     <span>&nbsp; Downloads</span>
                 </a>

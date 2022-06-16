@@ -1505,3 +1505,12 @@ a.nav-link.active {
   color: #42ccb3;
   background: #24303e;
 }
+.file-drop-area input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 69%;
+  cursor: pointer;
+  opacity: 0;
+}

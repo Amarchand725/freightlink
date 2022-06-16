@@ -19,7 +19,7 @@ Route::get('/', 'WebController@index');
 Route::get('contact', 'WebController@contact')->name('contact');
 Route::get('about-us', 'WebController@aboutUs')->name('about-us');
 Route::get('benefits', 'WebController@benefits')->name('benefits');
-Route::get('network', 'WebController@network')->name('network');
+Route::get('networks', 'WebController@network')->name('networks');
 Route::get('faqs', 'WebController@faqs')->name('faqs');
 Route::post('register/store', 'WebController@store')->name('register.store');
 Route::get('thanks', 'WebController@thanks')->name('thanks');
@@ -40,6 +40,8 @@ Route::get('admin/reset-password/{token}', 'Admin\AdminController@resetPassword'
 Route::post('admin/change_password', 'Admin\AdminController@changePassword')->name('admin.change_password');
 
 Route::get('subscribe/index', 'Admin\AdminController@subscribe')->name('subscribe.index');
+
+// Route::get('download/index', 'Admin\DownloadController@index')->name('download.index');
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
@@ -97,3 +99,12 @@ Route::resource('expands_possibility', 'Admin\ConnectExpandsPossibilityControlle
 
 //faqs
 Route::resource('faq', 'Admin\FaqController');
+
+//downloads
+Route::resource('download', 'Admin\DownloadController');
+
+//Company
+Route::resource('company', 'Admin\CompanyController');
+
+//Network
+Route::resource('network', 'Admin\NetworkController');

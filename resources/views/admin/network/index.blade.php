@@ -1,6 +1,17 @@
 @extends('layouts.admin.app')
 @section('title', $page_title)
 
+@push('css')
+	<style>
+		.dot {
+			height: 25px;
+			width: 25px;
+			border-radius: 50%;
+			display: inline-block;
+		}
+	</style>
+@endpush
+
 @section('content')
 	<main id="main" class="main">
 		<div class="search-bar search_bt">
@@ -39,6 +50,9 @@
 						<div class="mb-3 col-sm-1">
 							<button class="btn btn-primary buttons_green">Search</button>
 						</div>
+						<div class="mb-3 col-sm-2">
+							<a href="{{ route('network.create') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Create New Network" class="btn btn-primary buttons_green">Add New</a>
+						</div>
 					</div>
 				</div>
 				<!-- End Left side columns -->
@@ -48,17 +62,31 @@
 					<thead>
 						<tr>
 							<th>SL</th>
-							<th>Email</th>
+							<th>Logo</th>
+							<th>Color</th>
+							<th>Name</th>
+							<th>Description</th>
 							<th>Status</th>
-                            <th>Created At</th>
+							<th>Date</th>
 							<th width="140">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($models as $key=>$model)
-							<tr id="id-{{ $model->id }}">
+							<tr id="id-{{ $model->slug }}">
 								<td>{{  $models->firstItem()+$key }}.</td>
-								<td>{!! $model->email??'N/A' !!}</td>
+								<td>
+									@if($model->white_bg_logo)
+										<img src="{{ asset('public/admin/images/networks/'.$model->white_bg_logo) }}" alt="" style="width:60%;">
+									@else
+										<img src="{{ asset('public/admin/images/partners/no-photo1.jpg') }}" style="width:60%;">
+									@endif
+								</td>
+								<td>
+									<span class="dot" style="background-color:{{ $model->color }}"></span>
+								</td>
+								<td>{!! $model->title??'N/A' !!}</td>
+								<td>{!! \Illuminate\Support\Str::limit($model->description,60) !!}</td>
 								<td>
 									@if($model->status)
 										<span class="label label-success">Active</span>
@@ -68,8 +96,9 @@
 								</td>
 								<td>{{ date('d, F-Y h:i a', strtotime($model->created_at)) }}</td>
 								<td width="250px">
-									{{-- <a href="{{route('user.show', $model->id)}}" data-toggle="tooltip" data-placement="top" title="Show Company" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Show</a> --}}
-									<button class="btn btn-danger btn-sm delete" data-toggle="tooltip" data-placement="top" title="Delete Company" data-slug="{{ $model->id }}" data-del-url="{{ route('user.destroy', $model->id) }}"><i class="fa fa-trash"></i> Delete</button>
+									<a href="{{route('network.edit', $model->id)}}" data-toggle="tooltip" data-placement="top" title="Edit Network" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
+									{{-- <a href="{{route('partner.show', $model->slug)}}" data-toggle="tooltip" data-placement="top" title="Show Partner" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Show</a> --}}
+									<button class="btn btn-danger btn-sm delete" data-toggle="tooltip" data-placement="top" title="Delete Network" data-slug="{{ $model->slug }}" data-del-url="{{ route('network.destroy', $model->slug) }}"><i class="fa fa-trash"></i> Delete</button>
 								</td>
 							</tr>
 						@endforeach
@@ -87,8 +116,13 @@
 		</section>
 	</main>
 </section>
-
 @endsection
 
 @push('js')
+<script>
+	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+		return new bootstrap.Tooltip(tooltipTriggerEl)
+	})
+</script>
 @endpush

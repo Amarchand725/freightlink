@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConnectExpandsPossibilitiesTable extends Migration
+class CreateNetworksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateConnectExpandsPossibilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('connect_expands_possibilities', function (Blueprint $table) {
+        Schema::create('networks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('created_by');
             $table->string('title');
             $table->string('slug');
+            $table->string('color');
             $table->text('description');
             $table->string('black_bg_logo')->nullable();
             $table->string('white_bg_logo')->nullable();
@@ -34,6 +35,6 @@ class CreateConnectExpandsPossibilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('connect_expands_possibilities');
+        Schema::dropIfExists('networks');
     }
 }

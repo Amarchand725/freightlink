@@ -8,7 +8,7 @@
 				<div class="col-lg-12 mrl_head">
 					<div class="row py-2" style="background: #FCFCFC; ">
 						<div class="col-lg-8 mrl_head">
-							<h4> <img src="{{ asset('public/admin/assets/img/frieght-imgs/log-in.png') }}" alt="truck" class="IMG-FLUID"> &nbsp; {{ $page_title }}</h4>
+							<h4> <img src="{{ asset('public/admin/assets/img/frieght-imgs/company-green.png') }}" alt="truck" class="IMG-FLUID"> &nbsp; {{ $page_title }}</h4>
 						</div>
 						<div class="col-lg-4 mt-2 brd_crmbs ">
 							<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
@@ -28,32 +28,33 @@
 			</div>
 		</div>
 
-		<section class="section dashboard">
-			<div class="row">
-				<!-- Left side columns -->
+		<section class="section dashboard" style="background: #FCFCFC;">
+            <div class="row">
 				<div class="col-lg-12 frm_st">
 					<div class="row">
 						<div class="mb-3 col-sm-9">
-							<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Search...">
+							<input type="text" class="form-control" id="search" placeholder="Search...">
 						</div>
 						<div class="mb-3 col-sm-1">
-							<button class="btn btn-primary buttons_green">Search</button>
+							<button type="button" class="btn btn-primary buttons_green">Search</button>
 						</div>
 						<div class="mb-3 col-sm-2">
-							<a href="{{ route('expands_possibility.create') }}" class="btn btn-primary buttons_green">Add New</a>
+							<a href="{{ route('company.create') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Create New Compnay" class="btn btn-primary buttons_green">Add New</a>
 						</div>
 					</div>
 				</div>
-				<!-- End Left side columns -->
 			</div>
-			<div class="d-flex justify-content-center ">
-				<table class="table table-borderless table-responsive">
+            <hr>
+          
+            <div class="d-flex justify-content-center ">
+                <table class="table table-borderless table-responsive">
 					<thead>
 						<tr>
 							<th>SL</th>
 							<th>Logo</th>
 							<th>Name</th>
-							<th>Description</th>
+							<th>Country</th>
+							<th>City</th>
 							<th>Status</th>
 							<th>Date</th>
 							<th width="140">Action</th>
@@ -70,8 +71,9 @@
 										<img src="{{ asset('public/admin/images/partners/no-photo1.jpg') }}" style="width:50px;">
 									@endif
 								</td>
-								<td>{!! $model->title??'N/A' !!}</td>
-								<td>{!! \Illuminate\Support\Str::limit($model->description,60) !!}</td>
+								<td>{!! $model->name??'N/A' !!}</td>
+								<td>{!! $model->country??'N/A' !!}</td>
+								<td>{!! $model->city??'N/A' !!}</td>
 								<td>
 									@if($model->status)
 										<span class="label label-success">Active</span>
@@ -81,9 +83,9 @@
 								</td>
 								<td>{{ date('d, F-Y h:i a', strtotime($model->created_at)) }}</td>
 								<td width="250px">
-									<a href="{{route('expands_possibility.edit', $model->id)}}" data-toggle="tooltip" data-placement="top" title="Edit Expands Possibility" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
+									<a href="{{route('company.edit', $model->id)}}" data-toggle="tooltip" data-placement="top" title="Edit Company" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
 									{{-- <a href="{{route('partner.show', $model->slug)}}" data-toggle="tooltip" data-placement="top" title="Show Partner" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Show</a> --}}
-									<button class="btn btn-danger btn-sm delete" data-toggle="tooltip" data-placement="top" title="Delete Expands Possibility" data-slug="{{ $model->slug }}" data-del-url="{{ route('expands_possibility.destroy', $model->slug) }}"><i class="fa fa-trash"></i> Delete</button>
+									<button class="btn btn-danger btn-sm delete" data-toggle="tooltip" data-placement="top" title="Delete Company" data-slug="{{ $model->slug }}" data-del-url="{{ route('company.destroy', $model->slug) }}"><i class="fa fa-trash"></i> Delete</button>
 								</td>
 							</tr>
 						@endforeach
@@ -97,8 +99,8 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</section>
+            </div>
+        </section>
 	</main>
 </section>
 

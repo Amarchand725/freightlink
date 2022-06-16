@@ -12,7 +12,7 @@ use App\Models\Subscriber;
 use App\Models\User;
 use App\Models\Partner;
 use App\Models\Benefit;
-use App\Models\ConnectExpandsPossibility;
+use App\Models\Network;
 use App\Models\ContactUs;
 use App\Models\Faq;
 use Hash;
@@ -22,17 +22,12 @@ class WebController extends Controller
 {
     public function index()
     {
-        $page_title = 'Freight - Home';
-        // $sliders = Slider::orderby('id', 'desc')->where('status', 1)->get();
-        // $services = Service::orderby('id', 'desc')->where('status', 1)->get();
-        // $team_members = Team::orderby('id', 'asc')->where('status', 1)->get();
-        // $testimonials = Testimonial::orderby('id', 'desc')->where('status', 1)->get();
-
+        $page_title = 'Home - Freight';
         $partners = Partner::orderby('id', 'desc')->where('status', 1)->take(6)->get();
         $benefits = Benefit::orderby('id', 'asc')->where('status', 1)->take(6)->get();
-        $expands_possibilities = ConnectExpandsPossibility::orderby('id', 'desc')->where('status', 1)->take(5)->get();
+        $networks = Network::orderby('id', 'desc')->where('status', 1)->take(5)->get();
         $faqs = Faq::orderby('id', 'desc')->where('status', 1)->get();
-        return view('index', compact('page_title', 'partners', 'benefits', 'expands_possibilities', 'faqs'));
+        return view('index', compact('page_title', 'partners', 'benefits', 'networks', 'faqs'));
     }
 
     public function authenticate(Request $request)

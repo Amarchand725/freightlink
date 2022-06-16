@@ -134,4 +134,10 @@ class AdminController extends Controller
         $models = Subscriber::orderby('id', 'desc')->paginate(10);
         return view('admin.subscriber.index', compact('page_title', 'models'));
     }
+    public function downloads()
+    {
+        $page_title = 'All Downloads';
+        $models = Subscriber::orderby('id', 'desc')->paginate(10);
+        return view('admin.subscriber.index', compact('page_title', 'models'));
+    }
 }

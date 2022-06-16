@@ -30,40 +30,33 @@
 		<section class="section dashboard">
 			<div class="row">
 				<div class="col-md-12">
-					<form action="{{ route('expands_possibility.update', $model->id) }}" id="regform" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+					<form action="{{ route('benefit.store') }}" id="regform" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 						@csrf
-						{{ method_field('PATCH') }}
 						<div class="box box-info">
 							<div class="box-body">
 								<div class="form-group mb-3">
 									<label for="" class="col-sm-2 control-label">Title <span style="color: red">*</span></label>
 									<div class="col-sm-9">
-										<input type="text" autocomplete="off" class="form-control" name="title" value="{{ $model->title }}" placeholder="Enter company title">
+										<input type="text" autocomplete="off" class="form-control" name="title" value="{{ old('title') }}" placeholder="Enter company title">
 										<span style="color: red">{{ $errors->first('title') }}</span>
 									</div>
 								</div>
 								<div class="form-group mb-3">
 									<label for="" class="col-sm-2 control-label">Description </label>
 									<div class="col-sm-9">
-										<textarea class="form-control texteditor" name="description" style="height:200px;" placeholder="Enter description">{{ $model->description }}</textarea>
+										<textarea class="form-control texteditor" name="description" style="height:200px;" placeholder="Enter description">{{ old('description') }}</textarea>
 										<span style="color: red">{{ $errors->first('description') }}</span>
 									</div>
 								</div>
-								@if($model->logo)
-									<div class="form-group mb-3">
-										<label for="" class="col-sm-2 control-label">Exist Logo </label>
-										<div class="col-sm-9" style="padding-top:5px">
-											<img src="{{ asset('public/admin/images/expands_possilities') }}/{{ $model->logo }}" alt="Post" width="30%">
-										</div>
-									</div>
-								@endif
+								
 								<div class="form-group mb-3">
-									<label for="" class="col-sm-2 control-label">Logo </label>
+									<label for="" class="col-sm-2 control-label">Icon <span style="color: red">*</span></label>
 									<div class="col-sm-9">
 										<input type="file" class="form-control" name="image">
+										<span style="color: red">{{ $errors->first('description') }}</span>
 									</div>
 								</div>
-								<div class="form-group mb-3">
+								<div class="form-group">
 									<label for="" class="col-sm-2 control-label"></label>
 									<div class="col-sm-9">
 										<button type="submit" class="btn btn-primary buttons_green pull-left" name="form1">Save</button>
