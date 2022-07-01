@@ -10,7 +10,7 @@
                     <form action="{{ route('user.authenticate') }}" method="post">
                         @csrf 
 
-                        <input type="hidden" name="user_type" value="Company">
+                        <input type="hidden" name="user_type" value="User">
                         <span class="text-white join_txt">Log in to Freightlink </span>
                         <div class="row text-center d-flex justify-content-center pt-3">
                             <div class="form-group col-md-8 pb-3">

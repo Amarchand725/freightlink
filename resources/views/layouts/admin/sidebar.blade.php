@@ -12,8 +12,27 @@
                 <span> &nbsp; Dashboard</span>
             </a>
         </li>
+        
         <!-- End Dashboard Nav -->
         @if(Auth::check() && Auth::user()->hasRole('Admin'))
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('admin/profile/edit') ? 'active' : '' }}" href="{{ route('admin.profile.edit') }}">
+                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/dashboard-icon-p.png') }}" alt="dashboard" class="img-fluid">
+                    <span> &nbsp; My Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('user') || request()->is('user/*') ? 'active' : '' }}" href="{{ route('user.index') }}">
+                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
+                    <span> &nbsp; Users</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('company/departed_members') ? 'active' : '' }}" href="{{ route('company.departed_members') }}">
+                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
+                    <span> &nbsp; Departed Members</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('company') || request()->is('company/*') ? 'active' : '' }}" href="{{ route('company.index') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/companies-p.png') }}" alt="dashboard" class="img-fluid">
@@ -43,12 +62,6 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('expands_possibility') || request()->is('expands_possibility/*') ? 'active' : '' }}" href="{{ route('expands_possibility.index') }}">
-                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
-                    <span> &nbsp; Networks</span>
-                </a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('network') || request()->is('network/*') ? 'active' : '' }}" href="{{ route('network.index') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
@@ -94,7 +107,6 @@
             <!-- End Charts Nav -->
 
             <!-- End Icons Nav -->
-
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('subscribe') || request()->is('subscribe/*') ? 'active' : '' }}" href="{{ route('subscribe.index') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/subscribe-p.png') }}" alt="dashboard" class="img-fluid">
@@ -103,39 +115,37 @@
             </li>
             <!-- End Profile Page Nav -->
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/linkden-p.png') }}" alt="dashboard" class="img-fluid">
                     <span> &nbsp; Social Media</span>
                 </a>
-            </li>
-            <!-- End F.A.Q Page Nav -->
+            </li> --}}
 
             <li class="nav-item text-center ">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}" href="{{ route('admin.users') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/admin-icon.png') }}" alt="dashboard" class="img-fluid">
                     <span> &nbsp; Admin Users</span>
                 </a>
             </li>
-        @elseif(Auth::check() && Auth::user()->hasRole('Company'))
+            <li class="nav-item text-center ">
+                <a class="nav-link {{ request()->is('announcement') || request()->is('announcement/*') ? 'active' : '' }}" href="{{ route('announcement.index') }}">
+                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/admin-icon.png') }}" alt="dashboard" class="img-fluid">
+                    <span> &nbsp; Announcements</span>
+                </a>
+            </li>
+        @elseif(Auth::check() && Auth::user()->hasRole('User'))
             <li class="nav-item">
-                <a class="nav-link " href="#">
-                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/d-1.png') }}" alt="user" class="img-fluid">
+                <a class="nav-link {{ request()->is('user/profile/edit') ? 'active' : '' }}" href="{{ route('user.profile.edit') }}">
+                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/dashboard-icon-p.png') }}" alt="dashboard" class="img-fluid">
                     <span> &nbsp; My Profile</span>
                 </a>
             </li>
             <!-- End Dashboard Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/dashboard-icon-p.png') }}" alt="user" class="img-fluid">
-                    <span>&nbsp; Dashboard</span>
-                </a>
-            </li>
             <!-- End Components Nav -->
-
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('downloads.index') }}">
+                <a class="nav-link {{ request()->is('download') ? 'active' : '' }}" href="{{ route('download.index') }}">
                 <img src="{{ asset('public/admin/assets/img/frieght-imgs/download-ic.png') }}" alt="user" class="img-fluid">
                     <span>&nbsp; Downloads</span>
                 </a>
@@ -143,31 +153,31 @@
             <!-- End Forms Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/d-cross.png') }}" alt="user" class="img-fluid">
-                    <span>&nbsp; Departed Members</span>
+                <a class="nav-link {{ request()->is('company/departed_members') ? 'active' : '' }}" href="{{ route('company.departed_members') }}">
+                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
+                    <span> &nbsp; Departed Members</span>
                 </a>
             </li>
             <!-- End Tables Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                <img src="{{ asset('public/admin/assets/img/frieght-imgs/d-ic-ann.png') }}" alt="user" class="img-fluid">
-                    <span>&nbsp; Announcements</span>
+            <li class="nav-item text-center ">
+                <a class="nav-link {{ request()->is('users/announcement') ? 'active' : '' }}" href="{{ route('users.announcement') }}">
+                    <img src="{{ asset('public/admin/assets/img/frieght-imgs/admin-icon.png') }}" alt="dashboard" class="img-fluid">
+                    <span> &nbsp; Announcements</span>
                 </a>
             </li>
             <!-- End Charts Nav -->
 
-            <li class="nav-item">
+           {{--  <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/d-ic-ad.png') }}" alt="user" class="img-fluid">
                     <span> &nbsp; Need Advertising?</span>
                 </a>
-            </li>
+            </li> --}}
             <!-- End Icons Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link" href="{{ route('suggestion.create') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/d-ic-idea.png') }}" alt="user" class="img-fluid">
                     <span> &nbsp; Suggestion Box</span>
                 </a>
@@ -190,12 +200,6 @@
                     <br><br>
                     <button class="btn btn-primary buttons_green mb-3  ">Talk with us!</button>
                 </span>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
-                    <i class="">&nbsp;&nbsp;</i>
-                    <span>Follow us !</span>
-                </a>
             </li>
             <li class="nav-item linkedin_icon">
                 <a class="nav-link collapsed" href="#">

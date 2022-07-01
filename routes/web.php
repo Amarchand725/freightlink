@@ -15,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/route-clear', function() {
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    $cache = 'Route cache cleared <br /> View cache cleared <br /> Cache cleared <br /> Config cleared <br /> Config cache cleared';
+    return $cache;
+});
+
 Route::get('/', 'WebController@index');
 Route::get('contact', 'WebController@contact')->name('contact');
 Route::get('about-us', 'WebController@aboutUs')->name('about-us');
@@ -33,6 +43,13 @@ Route::get('/admin/profile/edit', 'Admin\AdminController@editProfile')->name('ad
 Route::post('/admin/profile/update', 'Admin\AdminController@updateProfile')->name('admin.profile.update');
 Route::post('admin/logout', 'Admin\AdminController@logOut')->name('admin.logout');
 
+Route::get('admin/users', 'Admin\AdminController@adminUser')->name('admin.users');
+Route::get('admin/users/create', 'Admin\AdminController@adminUserCreate')->name('admin.users.create');
+Route::post('admin/users/store', 'Admin\AdminController@adminUserStore')->name('admin.users.store');
+Route::post('admin/users/upate/{id}', 'Admin\AdminController@adminUserUpdate')->name('admin.users.update');
+
+Route::get('company/departed_members', 'Admin\AdminController@departedMembers')->name('company.departed_members');
+
 //admin reset password
 Route::get('admin/forgot_password', 'Admin\AdminController@forgotPassword')->name('admin.forgot_password');
 Route::get('admin/send-password-reset-link', 'Admin\AdminController@passwordResetLink')->name('admin.send-password-reset-link');
@@ -47,12 +64,16 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 //user login
 Route::post('user/authenticate', 'WebController@authenticate')->name('user.authenticate');
+Route::get('/user/profile/edit', 'WebController@editProfile')->name('user.profile.edit');
+Route::post('/user/profile/update', 'WebController@updateProfile')->name('user.profile.update');
 
 //user reset password
 Route::get('user/forgot_password', 'WebController@forgotPassword')->name('user.forgot_password');
 Route::get('user/send-password-reset-link', 'WebController@passwordResetLink')->name('user.send-password-reset-link');
 Route::get('user/reset-password/{token}', 'WebController@resetPassword')->name('user.reset-password');
 Route::post('user/change_password', 'WebController@changePassword')->name('user.change_password');
+
+Route::get('users/announcement', 'WebController@announcement')->name('users.announcement');
 
 //Home
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
@@ -108,3 +129,9 @@ Route::resource('company', 'Admin\CompanyController');
 
 //Network
 Route::resource('network', 'Admin\NetworkController');
+
+//announcement
+Route::resource('announcement', 'Admin\AnnouncementController');
+
+//suggestion
+Route::resource('suggestion', 'SuggestionController');

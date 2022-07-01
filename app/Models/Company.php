@@ -10,4 +10,9 @@ class Company extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function hasCompanyNetworks()
+    {
+        return $this->hasMany(CompanyNetwork::class, 'company_id', 'id');
+    }
 }

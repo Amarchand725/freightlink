@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Network;
+use App\Models\Company;
 use Auth;
 
 class HomeController extends Controller
@@ -28,8 +31,11 @@ class HomeController extends Controller
             $page_title = 'Admin Dashboard - Freightlink';
             return View('admin.dashboard.dashboard', compact('page_title'));
         }elseif(Auth::check()){
-            $page_title = 'Company Dashboard - Freightlink';
-            return View('web.dashboard.dashboard', compact('page_title'));
+            $page_title = 'User Dashboard - Freightlink';
+            $model = User::where('id', Auth::user()->id)->first();
+            $networks = Network::where('status', 1)->get();
+            $companies = Company::where('status', 1)->get();
+            return View('web.dashboard.dashboard', compact('page_title', 'model', 'networks', 'companies'));
         }else{
             return redirect()->route('admin.login');
         }

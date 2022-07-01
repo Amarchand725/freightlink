@@ -14,19 +14,6 @@
                         <h4> <img src="{{ asset('public/admin/assets/img/frieght-imgs/log-in.png') }}" alt="truck" class="IMG-FLUID"> &nbsp; Log In Record
                         </h4>
                     </div>
-                    <div class="col-lg-4 mt-2 brd_crmbs ">
-                        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
-                            aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item  active"><a href="#">7D</a></li>
-                                <li class="breadcrumb-item " aria-current="page">30D</li>
-                                <li class="breadcrumb-item " aria-current="page">6M</li>
-                                <li class="breadcrumb-item " aria-current="page">1Y</li>
-                                <li class="breadcrumb-item " aria-current="page">YTD</li>
-                                <li class="breadcrumb-item " aria-current="page">Clear</li>
-                            </ol>
-                        </nav>
-                    </div>
                 </div>
             </div>
         </div>

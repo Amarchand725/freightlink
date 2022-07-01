@@ -14,7 +14,9 @@ use App\Models\Partner;
 use App\Models\Benefit;
 use App\Models\Network;
 use App\Models\ContactUs;
+use App\Models\ConnectExpandsPossibility;
 use App\Models\Faq;
+use App\Models\Announcement;
 use Hash;
 use Auth;
 
@@ -32,7 +34,6 @@ class WebController extends Controller
 
     public function authenticate(Request $request)
     {
-        // return $request;
         $user = User::where('email', $request->email)->first();
         if(!empty($user) && $user->status==1 && $user->hasRole($request->user_type)){
             $credentials = $request->only('email', 'password');
@@ -43,6 +44,48 @@ class WebController extends Controller
             return redirect()->back()->with('error', 'Failed to login try again.!');
         }else{
             return redirect()->back()->with('error', 'Something went wrong!');
+        }
+    }
+    public function editProfile()
+    {
+        $page_title = 'Edit Profile';
+        $model = User::where('id', Auth::user()->id)->first();
+        return view('web.dashboard.edit', compact('page_title', 'model'));
+    }
+
+    public function updateProfile(Request $request)
+    {   
+        if($request->update_status=="profile"){
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
+
+            $user = User::where('id', Auth::user()->id)->first();
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->update();
+            return redirect()->back()->with('message','Profile updated successfully');
+        }else{
+            $this->validate($request, [
+                'old_password' => 'required',
+                'new_password' => 'required|same:confirm_password',
+            ]);
+
+            $user = User::where('email', Auth::user()->email)->first();
+
+            $request['email'] = Auth::user()->email;
+            $request['password'] = $request->old_password;
+            if($user){
+                $credentials = $request->only('email', 'password');
+                if (Auth::attempt($credentials)) {
+                    $user->password = Hash::make($request->new_password);
+                }else{
+                    return redirect()->back()->with('error','Current Password not matched.!');
+                }
+            }
+            
+            $user->update();
+            return redirect()->back()->with('message','Profile updated successfully');
         }
     }
 
@@ -62,8 +105,8 @@ class WebController extends Controller
     public function network()
     {
         $page_title = 'Network - Freightlink';
-        $expands_possibilities = ConnectExpandsPossibility::orderby('id', 'desc')->where('status', 1)->take(5)->get();
-        return view('web.network', compact('page_title', 'expands_possibilities'));
+        $networks = Network::orderby('id', 'desc')->where('status', 1)->take(5)->get();
+        return view('web.network', compact('page_title', 'networks'));
     }
     public function faqs()
     {
@@ -255,5 +298,12 @@ class WebController extends Controller
         \Mail::to($user->email)->send(new \App\Mail\Email($details));
 
         return redirect()->route('thanks')->with('message', 'We have sent you OTP in your email.');
+    }
+
+    public function announcement()
+    {
+        $models = Announcement::orderby('id', 'desc')->where('status', 1)->paginate(10);
+        $page_title = 'All Announcements';
+        return view('web.announcement', compact('page_title','models'));
     }
 }

@@ -23,7 +23,7 @@
                     @if(Auth::user()->image)
                         <img src="{{ asset('public/admin/assets/img') }}/{{ Auth::user()->image }}" alt="Profile" class="rounded-circle"> 
                     @else 
-                    <img src="{{ asset('public/admin/assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
+                        <img src="{{ asset('public/admin/assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
                     @endif
                     
                     <i class="fa fa-angle-down down" aria-hidden="true"></i>
@@ -40,35 +40,21 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.profile.edit') }}">
-                            <i class="bi bi-person"></i>
-                            <span>My Profile</span>
-                        </a>
+                        @if(Auth::user()->hasRole('Admin'))
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.profile.edit') }}">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        @else 
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('user.profile.edit') }}">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        @endif
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                            <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                            <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
                     <li>
                         @if(Auth::user()->hasRole('Admin'))
                             <a class="dropdown-item btn btn-default btn-flat" href="{{ route('admin.logout') }}"

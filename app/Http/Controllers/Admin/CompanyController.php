@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Network;
+use App\Models\CompanyNetwork;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -21,7 +22,11 @@ class CompanyController extends Controller
             $query = Company::orderby('id', 'desc')->where('id', '>', 0);
             if($request['search'] != ""){
                 $query->where('name', 'like', '%'. $request['search'] .'%')
-                    ->orWhere('price', 'like', '%'. $request['search'] .'%');
+                    ->orWhere('enrollment_date', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('country', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('city', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('address', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('website', 'like', '%'. $request['search'] .'%');
             }
             if($request['status']!="All"){
                 if($request['status']==2){
@@ -30,7 +35,7 @@ class CompanyController extends Controller
                 $query->where('status', $request['status']);
             }
             $models = $query->paginate(10);
-            return (string) view('admin.download.search', compact('models'));
+            return (string) view('admin.company.search', compact('models'));
         }
         $page_title = 'All Companies';
         $models = Company::orderby('id', 'desc')->paginate(10);
@@ -57,26 +62,46 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
         $validator = $request->validate([
-            'name' => 'required|unique:downloads,name',
-            'file' => 'required',
+            'company_name' => 'required',
+            'enrollment_date' => 'required',
+            'expiry_date' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'logo' => 'required',
         ]);
 
-        // return $request;
-        $model = new Company();
+        try{
+            $model = new Company();
 
-        if (isset($request->file)) {
-            $file = date('d-m-Y-His').'.'.$request->file('file')->getClientOriginalExtension();
-            $request->file->move(public_path('/admin/images/downloads'), $file);
-            $model->file = $file;
+            if (isset($request->logo)) {
+                $logo = date('d-m-Y-His').'.'.$request->file('logo')->getClientOriginalExtension();
+                $request->logo->move(public_path('/admin/images/companies'), $logo);
+                $model->logo = $logo;
+            }
+
+            $full_address = $request->address_line_one.', '.$request->address_line_two.', '.$request->address_line_three;
+
+            $model->created_by = Auth::user()->id;
+            $model->name = $request->company_name;
+            $model->slug = \Str::slug($request->company_name);
+            $model->new_member = $request->new_member??0;
+            $model->suspended = $request->suspended??0;
+            $model->status = $request->status??0;
+            $model->on_website = $request->on_website??0;
+            $model->enrollment_date = $request->enrollment_date;
+            $model->expire_date = $request->expiry_date;
+            $model->country = $request->country;
+            $model->city = $request->city;
+            $model->address = $full_address;
+            $model->website = $request->website;
+            $model->profile = $request->profile;
+            $model->save();
+
+            return redirect()->route('company.edit', $model->id)->with('message', 'Company Added Successfully !');
+        }catch (\Exception $e) {
+            return redirect()->back()->with('message', 'Something went wrong.'. $e->getMessage());
         }
-
-        $model->created_by = Auth::user()->id;
-        $model->name = $request->name;
-        $model->save();
-
-        return redirect()->route('download.index')->with('message', 'File Added Successfully !');
     }
 
     /**
@@ -85,9 +110,12 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($slug)
     {
-        //
+        $page_title = 'Show Company';
+        $model = Company::where('slug', $slug)->first();
+        $networks = Network::where('status', 1)->get();
+        return view('admin.company.show', compact('page_title', 'model', 'networks'));
     }
 
     /**
@@ -98,9 +126,10 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $page_title = 'Edit Partner';
-        $model = Company::where('slug', $slug)->first();
-        return View('admin.partner.edit', compact("model","page_title"));
+        $page_title = 'Edit Company';
+        $networks = Network::where('status', 1)->get();
+        $model = Company::where('id', $id)->first();
+        return View('admin.company.edit', compact("model","page_title", "networks"));
     }
 
     /**
@@ -110,27 +139,86 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $company_id)
     {
-        $validator = $request->validate([
-            'description' => 'max:255',
-        ]);
+        if($request->save=='basic'){
+            $validator = $request->validate([
+                'company_name' => 'required',
+                'enrollment_date' => 'required',
+                'expiry_date' => 'required',
+                'country' => 'required',
+                'city' => 'required',
+                'logo' => 'required',
+            ]);
+    
+            try{
+                $model = Company::where('id', $company_id)->first();
+        
+                if (isset($request->logo)) {
+                    $logo = date('d-m-Y-His').'.'.$request->file('logo')->getClientOriginalExtension();
+                    $request->logo->move(public_path('/admin/images/companies'), $logo);
+                    $model->logo = $logo;
+                }
+        
+                $full_address = $request->address_line_one.', '.$request->address_line_two.', '.$request->address_line_three;
+        
+                $model->created_by = Auth::user()->id;
+                $model->name = $request->company_name;
+                $model->slug = \Str::slug($request->company_name);
+                $model->new_member = $request->new_member??0;
+                $model->suspended = $request->suspended??0;
+                $model->status = $request->status??0;
+                $model->on_website = $request->on_website??0;
+                $model->enrollment_date = $request->enrollment_date;
+                $model->expire_date = $request->expiry_date;
+                $model->country = $request->country;
+                $model->city = $request->city;
+                $model->address = $full_address;
+                $model->website = $request->website;
+                $model->profile = $request->profile;
+                $model->save();
+        
+                return redirect()->back()->with('message', 'Company updated Successfully !');
+            }catch (\Exception $e) {
+                return redirect()->back()->with('message', 'Something went wrong.'. $e->getMessage());
+            }
+        }else if($request->save=='network'){
+            $validator = $request->validate([
+                'networks' => 'required',
+                'networks.*' => 'required',
+            ]);
 
-        $model = Company::where('slug', $slug)->first();
+            try{
+                if(isset($request->networks)){
+                    CompanyNetwork::where('company_id', $company_id)->delete();
+                    foreach($request->networks as $network_id=>$status){
+                        CompanyNetwork::create([
+                            'company_id' => $company_id,
+                            'network_id' => $network_id,
+                            'status' => $status,
+                        ]);
+                    }
+                }
 
-        if (isset($request->image)) {
-            $image = date('d-m-Y-His').'.'.$request->file('image')->getClientOriginalExtension();
-            $request->image->move(public_path('/admin/images/partners'), $image);
-            $model->image = $image;
+                return redirect()->back()->with('message', 'Company network updated Successfully !');
+            }catch (\Exception $e) {
+                return redirect()->back()->with('message', 'Something went wrong.'. $e->getMessage());
+            }
+        }else if($request->save=='profile'){
+            $validator = $request->validate([
+                'company_profile' => 'required',
+            ]);
+
+            try{
+                $model = Company::where('id', $company_id)->first();
+                $model->profile = $request->company_profile;
+                $model->save();
+
+                return redirect()->back()->with('message', 'Company profile updated Successfully !');
+            }catch (\Exception $e) {
+                return redirect()->back()->with('message', 'Something went wrong.'. $e->getMessage());
+            }
         }
-
-        $model->created_by = Auth::user()->id;
-        $model->name = $request->name;
-        $model->slug = \Str::slug($request->name);
-        $model->description = $request->description;
-        $model->save();
-
-        return redirect()->route('partner.index')->with('message', 'Partner Updated Successfully !');
     }
 
     /**

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Subscriber;
+use App\Models\Company;
 use Auth;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -34,31 +36,45 @@ class AdminController extends Controller
     }
     public function editProfile()
     {
-        return view('admin.dashboard.edit');
+        $page_title = 'Edit Profile';
+        $model = User::where('id', Auth::user()->id)->first();
+        return view('admin.dashboard.edit', compact('page_title', 'model'));
     }
 
     public function updateProfile(Request $request)
     {   
-        $user = User::where('id', Auth::user()->id)->first();
-        $user->name = $request->name;
-
-        if(empty($request->name)){
+        if($request->update_status=="profile"){
             $this->validate($request, [
                 'name' => 'required',
             ]);
-        }
 
-        if(isset($request->password)){
+            $user = User::where('id', Auth::user()->id)->first();
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->update();
+            return redirect()->back()->with('message','Profile updated successfully');
+        }else{
             $this->validate($request, [
-                'name' => 'required',
-                'password' => 'required|same:confirm-password',
-            ]);          
-            
-            $user->password = Hash::make($request->password);
-        }
+                'old_password' => 'required',
+                'new_password' => 'required|same:confirm_password',
+            ]);
 
-        $user->update();
-        return redirect()->back()->with('message','Profile updated successfully');
+            $user = User::where('email', Auth::user()->email)->first();
+
+            $request['email'] = Auth::user()->email;
+            $request['password'] = $request->old_password;
+            if($user){
+                $credentials = $request->only('email', 'password');
+                if (Auth::attempt($credentials)) {
+                    $user->password = Hash::make($request->new_password);
+                }else{
+                    return redirect()->back()->with('error','Current Password not matched.!');
+                }
+            }
+            
+            $user->update();
+            return redirect()->back()->with('message','Profile updated successfully');
+        }
     }
     public function logOut()
     {
@@ -139,5 +155,121 @@ class AdminController extends Controller
         $page_title = 'All Downloads';
         $models = Subscriber::orderby('id', 'desc')->paginate(10);
         return view('admin.subscriber.index', compact('page_title', 'models'));
+    }
+    public function adminUser(Request $request)
+    {
+        if($request->ajax()){
+            $query = User::orderby('id', 'desc');
+            if($request['search'] != ""){
+                $query->where('title', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('name', 'like', '%'. $request['search'] .'%')
+                    /* ->orWhere('last_name', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('email', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('phone', 'like', '%'. $request['search'] .'%') */;
+            }
+            if($request['status']!="All"){
+                $query->where('status', $request['status']);
+            }
+            $models = $query->where('parent_id', 1)->paginate(10);
+            return (string) view('admin.admin_users.search', compact('models'));
+        }
+        $models = User::where('parent_id', '!=', '')->paginate(10);
+        $page_title = 'All Admin Users';
+        return view('admin.admin_users.index', compact('page_title', 'models'));
+    }
+    public function adminUserCreate()
+    {
+        $page_title = 'Add User';
+        return view('admin.admin_users.create', compact('page_title'));
+    }
+    public function adminUserStore(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required:255',
+            'email' => 'required|unique:users,email',
+            'title' => 'required|max:255',
+            'password' => 'required|max:255',
+        ]);
+
+        $image = '';
+        if (isset($request->image)) {
+            $image = date('d-m-Y-His').'.'.$request->file('image')->getClientOriginalExtension();
+            $request->image->move(public_path('/admin/images/users'), $image);
+            $image = $image;
+        }
+
+        do{
+            $user_id = rand(1000, 9999);
+        }while(User::where('user_id', $user_id)->first());
+        
+        $user = User::create([
+            'parent_id' => Auth::user()->id,
+            'user_id' => $user_id,
+            'title' => $request->title,
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'offices' => json_encode($request->offices),
+            'image' => $image,
+            'status' => 1,
+        ]);
+
+        return redirect()->route('admin.users')->with('message', 'You have added user successfully.');
+    }
+
+    public function adminUserUpdate(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required:255',
+            'title' => 'required|max:255',
+        ]);
+
+        $user = User::where('id', $id)->first();
+
+        if (isset($request->image)) {
+            $image = date('d-m-Y-His').'.'.$request->file('image')->getClientOriginalExtension();
+            $request->image->move(public_path('/admin/images/users'), $image);
+            $user->image = $image;
+        }
+        
+        $user->parent_id = Auth::user()->id;
+        $user->title = $request->title;
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        if(!empty($request->password)){
+            $user->password = Hash::make($request->password);
+        }
+        if(!empty($request->offices)){
+            $user->offices = json_encode($request->offices);
+        }
+        $user->status = $request->status;
+        $user->save();
+
+        return redirect()->route('admin.users')->with('message', 'You have updated user successfully.');
+    }
+
+    public function departedMembers(Request $request)
+    {
+        if($request->ajax()){
+            $query = Company::orderby('id', 'desc')->where('expire_date', '<', date('Y-m-d'));
+            if($request['search'] != ""){
+                $query->where('name', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('country', 'like', '%'. $request['search'].'%');
+            }
+            if($request['status']!="All"){
+                if($request['status']==2){
+                    $request['status'] = 0;
+                }
+                $query->where('status', $request['status']);
+            }
+            $models = $query->paginate(10);
+            return (string) view('admin.company.departed-search', compact('models'));    
+        }
+
+        $page_title = 'All Departed Members';
+        $models = Company::orderBy('id','DESC')->where('expire_date', '<', date('Y-m-d'))->paginate(10);
+        return view('admin.company.departed-members', compact('models','page_title'));
     }
 }

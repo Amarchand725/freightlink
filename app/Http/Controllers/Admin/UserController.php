@@ -37,8 +37,8 @@ class UserController extends Controller
             $models = $query->paginate(10);
             return (string) view('admin.user.search', compact('models'));
         }
-        $page_title = 'All Companies';
-        $models = User::orderBy('id','DESC')->role('Company')->paginate(10);
+        $page_title = 'All Users';
+        $models = User::orderBy('id','DESC')->paginate(10);
         return view('admin.user.index', compact('models','page_title'));
     }
 

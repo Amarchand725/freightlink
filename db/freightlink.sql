@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2022 at 05:33 PM
+-- Generation Time: Jul 01, 2022 at 05:38 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `freightlink`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE `announcements` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `announcement` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `announcements` (`id`, `created_by`, `announcement`, `date`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(3, 1, '<h2>Why do we use it? -900</h2>\r\n<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>', '2022-06-30', 1, NULL, '2022-06-30 09:55:37', '2022-06-30 09:58:26'),
+(4, 1, '<h2>Why do we use it?</h2>\r\n<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>', '2022-06-30', 0, NULL, '2022-06-30 09:57:16', '2022-06-30 10:04:21'),
+(5, 1, '<p>testeddd asdf</p>', '2022-07-01', 1, NULL, '2022-07-01 10:34:54', '2022-07-01 10:34:54');
 
 -- --------------------------------------------------------
 
@@ -79,6 +105,13 @@ CREATE TABLE `companies` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`id`, `created_by`, `name`, `slug`, `new_member`, `suspended`, `status`, `on_website`, `enrollment_date`, `expire_date`, `country`, `city`, `address`, `website`, `profile`, `logo`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Beard Decker Plc', 'beard-decker-plc', 1, 1, 1, 0, '1990-11-18', '1972-10-11', 'Ut a Nam quia aut eu', 'Accusamus est est se', 'Address 1, Address 2, Address 3', 'https://www.fozajigo.ca', '<div>\r\n<h2>What is Lorem Ipsum?</h2>\r\n<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n</div>\r\n<div>\r\n<h2>Why do we use it?</h2>\r\n<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>\r\n</div>', '17-06-2022-094930.png', '2022-06-17 04:49:30', '2022-06-17 06:29:32');
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +126,17 @@ CREATE TABLE `company_networks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `company_networks`
+--
+
+INSERT INTO `company_networks` (`id`, `company_id`, `network_id`, `status`, `created_at`, `updated_at`) VALUES
+(2, 1, 1, 1, '2022-06-17 06:54:09', '2022-06-17 06:54:09'),
+(3, 1, 2, 1, '2022-06-17 06:54:09', '2022-06-17 06:54:09'),
+(4, 1, 3, 1, '2022-06-17 06:54:09', '2022-06-17 06:54:09'),
+(5, 1, 4, 1, '2022-06-17 06:54:09', '2022-06-17 06:54:09'),
+(6, 1, 5, 1, '2022-06-17 06:54:09', '2022-06-17 06:54:09');
 
 -- --------------------------------------------------------
 
@@ -290,7 +334,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (25, '2022_06_16_084329_create_downloads_table', 9),
 (27, '2022_06_16_111500_create_company_networks_table', 11),
 (28, '2022_06_16_105328_create_companies_table', 12),
-(29, '2022_06_16_130804_create_networks_table', 13);
+(29, '2022_06_16_130804_create_networks_table', 13),
+(30, '2022_06_30_134013_create_announcements_table', 14),
+(31, '2022_06_30_134858_create_suggestions_table', 15);
 
 -- --------------------------------------------------------
 
@@ -322,7 +368,10 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 11);
+(2, 'App\\Models\\User', 11),
+(3, 'App\\Models\\User', 12),
+(3, 'App\\Models\\User', 13),
+(3, 'App\\Models\\User', 14);
 
 -- --------------------------------------------------------
 
@@ -757,7 +806,24 @@ INSERT INTO `subscribers` (`id`, `name`, `email`, `status`, `deleted_at`, `creat
 (1, NULL, 'test@user.com', 1, NULL, '2022-06-14 10:37:11', '2022-06-14 10:37:11'),
 (2, NULL, 'teste22@gmail.com', 1, NULL, '2022-06-14 10:37:41', '2022-06-14 10:37:41'),
 (3, NULL, 'chandamar725@gmail.com', 1, NULL, '2022-06-14 10:43:05', '2022-06-14 10:43:05'),
-(4, NULL, 'superadmin@example.com', 1, NULL, '2022-06-15 03:13:41', '2022-06-15 03:13:41');
+(4, NULL, 'superadmin@example.com', 1, NULL, '2022-06-15 03:13:41', '2022-06-15 03:13:41'),
+(5, NULL, 'cibuxuzef@mailinator.com', 1, NULL, '2022-06-30 04:43:59', '2022-06-30 04:43:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suggestions`
+--
+
+CREATE TABLE `suggestions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `suggestion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -811,7 +877,9 @@ CREATE TABLE `testimonials` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_id` int(11) DEFAULT NULL,
   `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -827,6 +895,7 @@ CREATE TABLE `users` (
   `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `offices` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -836,13 +905,24 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `name`, `last_name`, `phone`, `email`, `temprary_email`, `email_verified_at`, `password`, `remember_token`, `status`, `verify_token`, `image`, `company_name`, `website`, `country`, `city`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, '4046', 'Hardik', '', '', 'admin@gmail.com', NULL, NULL, '$2y$10$TrSMTkdqZ4CkZe8zLOz/AuMG5CYt3vVpO4dHwUN.ecPMsAorlD416', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-13 06:16:17'),
-(11, '3639', 'Kirby Terrell', NULL, NULL, 'chandamar725@gmail.com', NULL, NULL, '$2y$10$yFyUN7Xcu6QiFV1e7neGDeDmR9OIVN1hVdgSyhOPo.L5QWsg3sy/W', NULL, 1, NULL, NULL, 'Castro Mccormick Plc', 'https://www.rudepusiba.com.au', 'Enim rerum eligendi', 'Ut debitis illo quam', NULL, '2022-06-15 07:57:04', '2022-06-15 07:57:04');
+INSERT INTO `users` (`id`, `parent_id`, `user_id`, `title`, `name`, `last_name`, `phone`, `email`, `temprary_email`, `email_verified_at`, `password`, `remember_token`, `status`, `verify_token`, `image`, `company_name`, `website`, `country`, `city`, `offices`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, NULL, '4046', NULL, 'Admin', '', '123456789', 'admin@gmail.com', NULL, NULL, '$2y$10$RquT5D0lIvBFuG0MrsL6G.OifRI.sSmAKqJ3M8qwByYm2DgxFXaBO', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-17 07:06:07', '2022-06-30 08:06:24'),
+(11, NULL, '3639', NULL, 'Kirby Terrell', NULL, NULL, 'chandamar725@gmail.com', NULL, NULL, '$2y$10$m00ha7bfzEd1m3QzouMGueU4HLeBIJ5PWFr1sacQnbF6.LZ/6dlF.', NULL, 1, '62ac6dfe33127', NULL, 'Castro Mccormick Plc', 'https://www.rudepusiba.com.au', 'Enim rerum eligendi', 'Ut debitis illo quam', NULL, NULL, '2022-06-15 07:57:04', '2022-06-17 07:05:18'),
+(12, NULL, '3135', NULL, 'John Doe', NULL, NULL, 'johndoe@brothers.com', NULL, NULL, '$2y$10$1H7vPGCc8i61YxON3..Jc.X.9zwvU.AfepuuP3BoGUYnkmaVsMBZa', NULL, 1, NULL, NULL, 'John Doe & brothers', 'www.johndoebrothers.com', 'USA', 'Toronto', NULL, NULL, '2022-06-29 10:35:38', '2022-06-29 10:35:38'),
+(13, NULL, '9173', NULL, 'Amar', NULL, NULL, 'softwaredeveloper992@gmail.com', NULL, NULL, '$2y$10$vS9le6.9UxXTRJFWN8YghutMoHH.n6tj10u.ItRe7V/s3vdNLf/06', NULL, 1, NULL, NULL, 'Amar Geo Tag', 'www.amargeotag.com', 'Pakistan', 'Karachi', NULL, NULL, '2022-06-29 10:37:31', '2022-06-29 10:37:31'),
+(14, NULL, '1603', NULL, 'Rhona Nixon', NULL, NULL, 'zowawecyly@mailinator.com', NULL, NULL, '$2y$10$k7ohYMCDzv0NXoRA1wN9Ju1TeMM0unJfJRdwn7VoTXS5lMe4543cm', NULL, 1, NULL, NULL, 'Rosario Boyle Trading', 'https://www.galubohyhyviduz.me', 'Sit commodo ut nihi', 'Deserunt voluptatibu', NULL, NULL, '2022-06-30 04:44:13', '2022-06-30 04:44:13'),
+(15, 1, '1078', 'redanydyqe', 'zaxihi Lore ipsum', 'sytugebi', '34343', 'quno@mailinator.com', NULL, NULL, '$2y$10$t/dAgcK3zuWA772UsLI/A.Uvo6nGl2x6odKzGsW6i2ibwtaomqCOC', NULL, 1, NULL, '01-07-2022-100636.png', NULL, NULL, NULL, NULL, '[null,null,\"Voluptate vel possim\"]', NULL, '2022-07-01 05:06:36', '2022-07-01 05:49:56'),
+(16, 1, '2116', 'runuvokym', 'mevyhy', 'nemotyquca', NULL, 'qyjivon@mailinator.com', NULL, NULL, '$2y$10$cCks0qw/M7vl5zM5hhJzmOlnhGVm8YYJhz0FgzR71VL5YLNvcDYxq', NULL, 1, NULL, '01-07-2022-105019.png', NULL, NULL, NULL, NULL, '[\"Hic labore omnis et\"]', NULL, '2022-07-01 05:50:19', '2022-07-01 05:50:19');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `announcements`
+--
+ALTER TABLE `announcements`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `benefits`
@@ -1009,6 +1089,12 @@ ALTER TABLE `subscribers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `suggestions`
+--
+ALTER TABLE `suggestions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `teams`
 --
 ALTER TABLE `teams`
@@ -1032,6 +1118,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `announcements`
+--
+ALTER TABLE `announcements`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `benefits`
 --
 ALTER TABLE `benefits`
@@ -1041,13 +1133,13 @@ ALTER TABLE `benefits`
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `company_networks`
 --
 ALTER TABLE `company_networks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `connect_expands_possibilities`
@@ -1089,7 +1181,7 @@ ALTER TABLE `mail_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `networks`
@@ -1161,7 +1253,13 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `suggestions`
+--
+ALTER TABLE `suggestions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `teams`
@@ -1179,7 +1277,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables

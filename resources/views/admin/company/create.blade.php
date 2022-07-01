@@ -27,123 +27,116 @@
 				</div>
 			</div>
 		</div>
-		<div class="search-bar search_bt">
-            <div class="row" style="background: #FCFCFC;">
-                <div class="col-lg-12 mrl_head">
-                    <div class="row py-2" style="background: #FCFCFC; ">
-                        <div class="col-lg-12 mrl_head">
-                            <div class="row label_forms">
-                                <div class="col-3 frm_st">
-                                    <input type="email" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Company Name">
-                                </div>
-                                <div class="col-2">
-                                    <!-- Checked switch -->
-                                    <div class="form-check form-switch">
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">New Member
-                                        </label>
-                                        <input class="form-check-input " type="checkbox" role="switch"
-                                            id="flexSwitchCheckChecked" checked />
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <!-- Checked switch -->
-                                    <div class="form-check form-switch">
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">Suspended
-                                        </label>
-                                        <input class="form-check-input bg-danger" type="checkbox" role="switch"
-                                            id="flexSwitchCheckChecked" checked />
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <!-- Checked switch -->
-                                    <div class="form-check form-switch">
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">Active
-                                        </label>
-                                        <input class="form-check-input bg-success" type="checkbox" role="switch"
-                                            id="flexSwitchCheckChecked" checked />
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <!-- Checked switch -->
-                                    <div class="form-check form-switch">
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">On Website
-                                        </label>
-                                        <input class="form-check-input bg-success" type="checkbox" role="switch"
-                                            id="flexSwitchCheckChecked" checked />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 		<section class="section dashboard" style="background: #FCFCFC;">
             <section class="section faq">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="file-drop-area">
-                                        <img src="{{ asset('public/admin/assets/img/frieght-imgs/upload_btn.png') }}" alt="folder-icon"
-                                            class="img-fluid">
-                                        <input class="file-input" type="file" multiple="">
-                                    </div>
-                                    <div class=" row">
-                                        <div class="col-8 m-lg-4">
-                                            <button class="btn btn-primary buttons_green ">Upload Logo</button>
+                            <form class="form-inline" action="{{ route('company.store') }}" method="post" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                                @csrf
+                                <div class="row mb-5">
+                                    <div class="col-lg-12 mrl_head">
+                                        <div class="row label_forms">
+                                            <div class="col-3 frm_st">
+                                                <input type="text" class="form-control" value="{{ old('company_name') }}" name="company_name" id="company_name"  placeholder="Company Name*">
+                                                <span style="color: red">{{ $errors->first('company_name') }}</span>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-check form-switch">
+                                                    <label class="form-check-label" for="new-member">New Member </label>
+                                                    @if(old('new_member'))
+                                                        <input class="form-check-input" name="new_member" value="1" type="checkbox" role="switch"  id="new-member" checked />
+                                                    @else 
+                                                        <input class="form-check-input" name="new_member" value="1" type="checkbox" role="switch"  id="new-member" />
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check form-switch">
+                                                    <label class="form-check-label" for="suspended">Suspended </label>
+                                                    
+                                                    @if(old('suspended'))
+                                                        <input class="form-check-input bg-danger" name="suspended" value="1" type="checkbox" role="switch" id="suspended" checked />
+                                                    @else 
+                                                        <input class="form-check-input bg-danger" name="suspended" value="1" type="checkbox" role="switch" id="suspended" />
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check form-switch">
+                                                    <label class="form-check-label" for="status">Active </label>
+                                                    
+                                                    @if(old('status'))
+                                                        <input class="form-check-input bg-success" name="status" value="1" type="checkbox" role="switch" id="status" checked />
+                                                    @else 
+                                                        <input class="form-check-input bg-success" name="status" value="1" type="checkbox" role="switch" id="status"  />
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-check form-switch">
+                                                    <label class="form-check-label" for="on_website">On Website </label>
+                                                    
+                                                    @if(old('on_website'))
+                                                        <input class="form-check-input bg-success" name="on_website" value="1" type="checkbox" role="switch" id="on_website" checked />
+                                                    @else 
+                                                        <input class="form-check-input bg-success" name="on_website" value="1" type="checkbox" role="switch" id="on_website"  />
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-9 faq_inpt">
-                                    <form class="form-inline" action="/action_page.php">
+                                <div class="row">
+                                    <div class="col-lg-3" style="position: relative">
+                                        <div class="file-drop-area">
+                                            <img id="logo_preview" src="{{ asset('public/admin/assets/img/frieght-imgs/upload_btn.png') }}" alt="folder-icon" class="img-fluid">
+                                            <input class="file-input" name="logo" id="logo" type="file" multiple="">
+                                            <span style="color: red">{{ $errors->first('logo') }}</span>
+                                        </div>
+                                        <div class=" row">
+                                            <div class="col-8 m-lg-4">
+                                                <button class="btn btn-primary buttons_green ">Upload Logo</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 faq_inpt">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row mb-3">
-                                                    <label for="colFormLabelSm"
-                                                        class="col-sm-4 col-form-label col-form-label-sm">
-                                                        Address:</label>
+                                                    <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">
+                                                        Address:
+                                                    </label>
                                                     <div class="col-sm-8">
-                                                        <input type="name" class="form-control form-control-sm"
-                                                            id="colFormLabelSm" placeholder="Line 1">
+                                                        <input type="text" value="{{ old('address_line_one') }}" name="address_line_one" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Line 1">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row mb-3">
-                                                    <label for="colFormLabelSm"
-                                                        class="col-sm-5 col-form-label col-form-label-sm">Enrollment
+                                                    <label for="colFormLabelSm" class="col-sm-5 col-form-label col-form-label-sm">Enrollment
                                                         Date:
                                                     </label>
                                                     <div class="col-sm-7">
-                                                        <select id="disabledSelect" class="form-select">
-                                                            <option>Date</option>
-                                                        </select>
+                                                        <input type="date" value="{{ old('enrollment_date') }}" name="enrollment_date" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row mb-3">
-                                                    <label for="colFormLabelSm"
-                                                        class="col-sm-4 col-form-label col-form-label-sm"> </label>
+                                                    <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm"> </label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control form-control-sm"
-                                                            id="colFormLabelSm" placeholder="Line 2">
+                                                        <input type="text" value="{{ old('address_line_two') }}" name="address_line_two" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Line 2">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row mb-3">
                                                     <label for="colFormLabelSm"
-                                                        class="col-sm-5 col-form-label col-form-label-sm">Expriy date:
+                                                        class="col-sm-5 col-form-label col-form-label-sm">Expiry date:
                                                     </label>
                                                     <div class="col-sm-7">
-                                                        <select id="disabledSelect" class="form-select">
-                                                            <option>Date</option>
-                                                        </select>
+                                                        <input type="date" value="{{ old('expiry_date') }}" name="expiry_date" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,8 +146,7 @@
                                                         class="col-sm-4 col-form-label col-form-label-sm">
                                                     </label>
                                                     <div class="col-sm-8">
-                                                        <input type="name" class="form-control form-control-sm"
-                                                            id="colFormLabelSm" placeholder="Line 3">
+                                                        <input type="text" name="address_line_three" class="form-control form-control-sm" value="{{ old('address_line_three') }}" id="colFormLabelSm" placeholder="Line 3">
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,44 +156,39 @@
                                                         class="col-sm-5 col-form-label col-form-label-sm">Country:
                                                     </label>
                                                     <div class="col-sm-7">
-                                                        <select id="disabledSelect" class="form-select">
-                                                            <option>Country</option>
-                                                        </select>
+                                                        <input type="text" value="{{ old('country') }}" name="country" class="form-control" placeholder="Enter country name">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row mb-3">
-                                                    <label for="colFormLabelSm"
-                                                        class="col-sm-4 col-form-label col-form-label-sm">Website:
+                                                    <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">
+                                                        Website:
                                                     </label>
                                                     <div class="col-sm-8">
-                                                        <input type="name" class="form-control form-control-sm"
-                                                            id="colFormLabelSm" placeholder="Website">
+                                                        <input type="text" value="{{ old('website') }}" name="website" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Website">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row mb-3">
-                                                    <label for="colFormLabelSm"
-                                                        class="col-sm-5 col-form-label col-form-label-sm">City:
+                                                    <label for="colFormLabelSm" class="col-sm-5 col-form-label col-form-label-sm">
+                                                        City:
                                                     </label>
                                                     <div class="col-sm-7">
-                                                        <select id="disabledSelect" class="form-select">
-                                                            <option>City:</option>
-                                                        </select>
+                                                        <input type="text" value="{{ old('city') }}" name="city" class="form-control" placeholder="Enter city name">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 d-flex justify-content-end">
-                                                <button class="btn btn-primary buttons_green ">
+                                                <button type="submit" class="btn btn-primary buttons_green ">
                                                     Save Changes
                                                 </button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                         <div class="row py-4" style="background: #FCFCFC; ">
@@ -223,43 +210,16 @@
                         </div>
 
                         <div class="row py-4">
-                            <div class="col">
-                                <!-- Checked switch -->
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input bg-success" type="checkbox" role="switch"
-                                        id="flexSwitchCheckChecked" checked="">
+                            @foreach ($networks as $network)
+                                <div class="col">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input bg-success" type="checkbox" name="networks[{{ $network->id }}][]" value="1" role="switch" id="flexSwitchCheckChecked" checked="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <!-- Checked switch -->
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input bg-success" type="checkbox" role="switch"
-                                        id="flexSwitchCheckChecked" checked="">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <!-- Checked switch -->
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input bg-danger" type="checkbox" role="switch"
-                                        id="flexSwitchCheckChecked" checked="">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <!-- Checked switch -->
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input bg-danger" type="checkbox" role="switch"
-                                        id="flexSwitchCheckChecked" checked="">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <!-- Checked switch -->
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input bg-danger" type="checkbox" role="switch"
-                                        id="flexSwitchCheckChecked" checked="">
-                                </div>
-                            </div>
+                            @endforeach
+
                             <div class="col-md-12 d-flex justify-content-end pt-3">
-                                <button class="btn btn-primary buttons_green ">
+                                <button type="submit" disabled class="btn btn-primary buttons_green ">
                                     Save Changes
                                 </button>
                             </div>
@@ -279,10 +239,10 @@
                                     <div class="col-lg-12 mrl_head">
                                         <form action="#">
                                             <div class="form-group">
-                                                <textarea class="form-control texteditor" id="exampleFormControlTextarea1" rows="8" placeholder="Add text"></textarea>
+                                                <textarea class="form-control texteditor" name="company_profile" id="exampleFormControlTextarea1" rows="8" placeholder="Add text"></textarea>
                                             </div>
                                             <div class="pt-5 d-flex justify-content-end ">
-                                                <button class="btn btn-primary buttons_green  ">Save Changes</button>
+                                                <button type="submit" disabled class="btn btn-primary buttons_green  ">Save Changes</button>
                                             </div>
                                         </form>
                                     </div>
@@ -346,6 +306,13 @@
 
 @push('js')
 <script>
+    logo.onchange = evt => {
+        const [file] = logo.files
+        if (file) {
+            logo_preview.src = URL.createObjectURL(file)
+        }
+    }
+
 	$(document).ready(function() {
 		if ($(".texteditor").length > 0) {
 			tinymce.init({

@@ -1,6 +1,7 @@
 <?php 
 use App\Models\PageSetting;
 use App\Models\Partner;
+use App\Models\CompanyNetwork;
 
 function globalData()
 {
@@ -14,4 +15,9 @@ function globalData()
 
 function getPartners(){
     return Partner::where('status', 1)->get();
+}
+
+function networkStatus($company_id, $network_id)
+{
+    return CompanyNetwork::where('company_id', $company_id)->where('network_id', $network_id)->first();
 }
