@@ -17,6 +17,7 @@ use App\Models\ContactUs;
 use App\Models\ConnectExpandsPossibility;
 use App\Models\Faq;
 use App\Models\Announcement;
+use App\Models\LoginHistory;
 use Hash;
 use Auth;
 
@@ -39,6 +40,10 @@ class WebController extends Controller
             $credentials = $request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
+                LoginHistory::create([
+                    'login_id' => Auth::user()->id,
+                    'login_time' => date('Y-m-d h:i:s'),
+                ]);
                 return redirect()->route('dashboard');
             }
             return redirect()->back()->with('error', 'Failed to login try again.!');

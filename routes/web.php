@@ -48,7 +48,7 @@ Route::get('admin/users/create', 'Admin\AdminController@adminUserCreate')->name(
 Route::post('admin/users/store', 'Admin\AdminController@adminUserStore')->name('admin.users.store');
 Route::post('admin/users/upate/{id}', 'Admin\AdminController@adminUserUpdate')->name('admin.users.update');
 
-Route::get('company/departed_members', 'Admin\AdminController@departedMembers')->name('company.departed_members');
+Route::get('departed_members', 'Admin\AdminController@departedMembers')->name('departed_members');
 
 //admin reset password
 Route::get('admin/forgot_password', 'Admin\AdminController@forgotPassword')->name('admin.forgot_password');
@@ -57,7 +57,6 @@ Route::get('admin/reset-password/{token}', 'Admin\AdminController@resetPassword'
 Route::post('admin/change_password', 'Admin\AdminController@changePassword')->name('admin.change_password');
 
 Route::get('subscribe/index', 'Admin\AdminController@subscribe')->name('subscribe.index');
-
 // Route::get('download/index', 'Admin\DownloadController@index')->name('download.index');
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');

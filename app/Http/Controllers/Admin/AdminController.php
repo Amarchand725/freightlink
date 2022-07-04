@@ -144,8 +144,19 @@ class AdminController extends Controller
         }
     }
 
-    public function subscribe()
+    public function subscribe(Request $request)
     {
+        if($request->ajax()){
+            $query = Subscriber::orderby('id', 'desc');
+            if($request['search'] != " "){
+                $query->where('email', 'LIKE', '%'.$request['search'].'%');
+            }
+            if($request['status']!="All"){
+                $query->where('status', $request['status']);
+            }
+            $models = $query->paginate(10);
+            return (string) view('admin.subscriber.search', compact('models'));
+        }
         $page_title = 'All Subscribers';
         $models = Subscriber::orderby('id', 'desc')->paginate(10);
         return view('admin.subscriber.index', compact('page_title', 'models'));
@@ -159,18 +170,21 @@ class AdminController extends Controller
     public function adminUser(Request $request)
     {
         if($request->ajax()){
-            $query = User::orderby('id', 'desc');
+            $query = User::orderby('id', 'desc')->where('parent_id', 1);
             if($request['search'] != ""){
-                $query->where('title', 'like', '%'. $request['search'] .'%')
-                    ->orWhere('name', 'like', '%'. $request['search'] .'%')
-                    /* ->orWhere('last_name', 'like', '%'. $request['search'] .'%')
-                    ->orWhere('email', 'like', '%'. $request['search'] .'%')
-                    ->orWhere('phone', 'like', '%'. $request['search'] .'%') */;
+                $query->where(function($qry) use ($request){
+                    $qry->where('title', 'LIKE', '%'.$request['search'].'%');
+                    $qry->orWhere('name', 'LIKE', '%'.$request['search'].'%');
+                    $qry->orWhere('last_name', 'LIKE', '%'.$request['search'].'%');
+                    $qry->orWhere('email', 'LIKE', '%'.$request['search'].'%');
+                    $qry->orWhere('phone', 'LIKE', '%'.$request['search'].'%');
+                });
             }
             if($request['status']!="All"){
                 $query->where('status', $request['status']);
             }
-            $models = $query->where('parent_id', 1)->paginate(10);
+            $models = $query->paginate(10);
+
             return (string) view('admin.admin_users.search', compact('models'));
         }
         $models = User::where('parent_id', '!=', '')->paginate(10);
@@ -271,5 +285,5 @@ class AdminController extends Controller
         $page_title = 'All Departed Members';
         $models = Company::orderBy('id','DESC')->where('expire_date', '<', date('Y-m-d'))->paginate(10);
         return view('admin.company.departed-members', compact('models','page_title'));
-    }
+    }   
 }

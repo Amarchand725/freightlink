@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title', $page_title)
-<input type="hidden" id="page_url" value="{{ route('company.departed_members') }}">
+<input type="hidden" id="page_url" value="{{ route('departed_members') }}">
 @push('css')
 	<style>
 		.hex2::before {

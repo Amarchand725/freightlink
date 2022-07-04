@@ -11,7 +11,8 @@
             <div class="col-lg-12 mrl_head">
                 <div class="row py-2" style="background: #FCFCFC; ">
                     <div class="col-lg-8 mrl_head">
-                        <h4> <img src="{{ asset('public/admin/assets/img/frieght-imgs/log-in.png') }}" alt="truck" class="IMG-FLUID"> &nbsp; Log In Record
+                        <h4> 
+                            <img src="{{ asset('public/admin/assets/img/frieght-imgs/log-in.png') }}" alt="truck" class="IMG-FLUID"> &nbsp; Log In Record
                         </h4>
                     </div>
                 </div>
@@ -26,45 +27,10 @@
                 <form class="">
                     <div class="row">
                         <div class="mb-3 col">
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Company Name">
+                            <input type="text" class="form-control" id="login_search" placeholder="Search">
+                            <input type="hidden" class="form-control" id="login_search_url" value="{{ route('search_login') }}">
+                            <input type="hidden" id="status" value="All">
                         </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Region</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Country</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Network</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <button class="btn btn-primary buttons_green  ">Search</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                    <div class="mb-3 col">
-                    </div>
-                    <div class="mb-3 col">
-                    </div>
-                    <div class="mb-3 col">
-                        <select id="disabledSelect" class="form-select">
-                            <option>Date Range</option>
-                        </select>
-                    </div>
-                    <div class="mb-3 col">
-                        <select id="disabledSelect" class="form-select">
-                            <option>Date Range</option>
-                        </select>
-                    </div>
-                    <div class="mb-3 col">
-                        <button class="btn btn-primary buttons_green  ">Search</button>
-                    </div>
                     </div>
                 </form>
             </div>
@@ -73,278 +39,34 @@
       
         <div class="d-flex justify-content-center ">
             <table class="table table-borderless table-responsive">
-                <tbody>
+                <thead>
                     <tr class="top_head">
-                        <td>User Name</td>
-                        <td>Company Name</td>
-                        <td>Last Login</td>
+                        <th>S.No#</th>
+                        <th>User Name</th>
+                        <th>Company Name</th>
+                        <th>Last Login</th>
                     </tr>
-                    <tr class="para_txt">
-                        <td>John Doe</td>
-                        <td>ABC Logistics</td>
-                        <td>4 May 2021</td>
-                        <td>10</td>
-                    </tr>
-                    <tr class="para_txt">
-                        <td>John Doe</td>
-                        <td>ABC Logistics</td>
-                        <td>4 May 2021</td>
-                    <td>10</td>
+                </thead>
+                <tbody id="login-records">
+                    @foreach ($login_users as $key=>$login)
+                        <?php $user = App\Models\User::where('id', $login->login_id)->first(); ?>
+                        <tr>
+                            <td>{{ $login_users->firstItem()+$key }}.</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->company_name }}</td>
+                            <td>{{ date('d, F-Y h:i a', strtotime($user->created_at)) }}</td>
+                        </tr>
+                    @endforeach
+                    <tr>
+                        <td colspan="8">
+                            Displying {{$login_users->firstItem()}} to {{$login_users->lastItem()}} of {{$login_users->total()}} records
+                            <div class="d-flex justify-content-center">
+                                {!! $login_users->links('pagination::bootstrap-4') !!}
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-
-        <div class="d-flex justify-content-end">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center ">
-                    <li class="page-item disabled ">
-                        <a class="text-black" href="#" tabindex="-1"><small>Previous Page</small> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="text-black" href="#"> &nbsp; <small>Next Page</small></a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </section>
-
-    <br>
-    <div class="search-bar search_bt">
-        <div class="row" style="background: #FCFCFC;">
-            <div class="col-lg-12 mrl_head">
-                <div class="row py-2" style="background: #FCFCFC; ">
-                    <div class="col-lg-8 mrl_head">
-                        <h4> <img src="{{ asset('public/admin/assets/img/frieght-imgs/log-in.png') }}" alt="truck" class="IMG-FLUID"> &nbsp; Expiring Members
-                        </h4>
-                    </div>
-                    <div class="col-lg-4 mt-2 brd_crmbs ">
-                        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
-                            aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item  active"><a href="#">7D</a></li>
-                                <li class="breadcrumb-item " aria-current="page">30D</li>
-                                <li class="breadcrumb-item " aria-current="page">6M</li>
-                                <li class="breadcrumb-item " aria-current="page">1Y</li>
-                                <li class="breadcrumb-item " aria-current="page">YTD</li>
-                                <li class="breadcrumb-item " aria-current="page">Clear</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <section class="section dashboard">
-        <div class="row">
-            <!-- Left side columns -->
-            <div class="col-lg-12 frm_st">
-                <form class="">
-                    <div class="row">
-                        <div class="mb-3 col">
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Company Name">
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Region</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Country</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Network</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <button class="btn btn-primary buttons_green  ">Search</button>
-                        </div>
-                    </div>
-    
-                    <div class="row">
-                        <div class="mb-3 col">
-                        </div>
-                        <div class="mb-3 col">
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Date Range</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Date Range</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <button class="btn btn-primary buttons_green  ">Search</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    
-    <div class="d-flex justify-content-center ">
-        <table class="table table-borderless table-responsive">
-            <tbody>
-                <tr class="top_head">
-                    <td>Company Name</td>
-                    <td>Country</td>
-                    <td>City</td>
-                    <td>Expiry Date</td>
-                </tr>
-                <tr class="para_txt">
-                    <td>ABC Logistics</td>
-                    <td>Country</td>
-                    <td>City</td>
-                    <td><a href="#">1 January 2022</a></td>
-                </tr>
-                <tr class="para_txt">
-                    <td>ABC Logistics</td>
-                    <td>Country</td>
-                    <td>City</td>
-                    <td><a href="#">1 January 2022</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-        <div class="d-flex justify-content-end">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center ">
-                    <li class="page-item disabled ">
-                        <a class="text-black" href="#" tabindex="-1"><small>Previous Page</small> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="text-black" href="#"> &nbsp; <small>Next Page</small></a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </section>
-
-    <br>
-    <div class="search-bar search_bt">
-        <div class="row" style="background: #FCFCFC;">
-            <div class="col-lg-12 mrl_head">
-                <div class="row py-2" style="background: #FCFCFC; ">
-                    <div class="col-lg-8 mrl_head">
-                        <h4> <img src="{{ asset('public/admin/assets/img/frieght-imgs/log-in.png') }}" alt="truck" class="IMG-FLUID"> &nbsp; Expired Members
-                        </h4>
-                    </div>
-                    <div class="col-lg-4 mt-2 brd_crmbs ">
-                        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
-                            aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item  active"><a href="#">7D</a></li>
-                                <li class="breadcrumb-item " aria-current="page">30D</li>
-                                <li class="breadcrumb-item " aria-current="page">6M</li>
-                                <li class="breadcrumb-item " aria-current="page">1Y</li>
-                                <li class="breadcrumb-item " aria-current="page">YTD</li>
-                                <li class="breadcrumb-item " aria-current="page">Clear</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <section class="section dashboard">
-        <div class="row">
-            <!-- Left side columns -->
-            <div class="col-lg-12 frm_st">
-                <form class="">
-                    <div class="row">
-                        <div class="mb-3 col">
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Company Name">
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Region</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Country</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Network</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <button class="btn btn-primary buttons_green  ">Search</button>
-                        </div>
-                    </div>
-    
-                    <div class="row">
-                        <div class="mb-3 col">
-                        </div>
-                        <div class="mb-3 col">
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Date Range</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Date Range</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <button class="btn btn-primary buttons_green  ">Search</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- End Left side columns -->
-        </div>
-    
-        <div class="d-flex justify-content-center ">
-            <table class="table table-borderless table-responsive">
-                <tbody>
-                    <tr class="top_head">
-                        <td>Company Name</td>
-                        <td>Country</td>
-                        <td>City</td>
-                        <td>Expiry Date</td>
-                    </tr>
-                    <tr class="para_txt">
-                        <td>ABC Logistics</td>
-                        <td>Country</td>
-                        <td>City</td>
-                        <td class="text-danger">1 January 2022</td>
-                    </tr>
-                    <tr class="para_txt">
-                        <td>ABC Logistics</td>
-                        <td>Country</td>
-                        <td>City</td>
-                        <td class="text-danger">1 January 2022</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    
-        <div class="d-flex justify-content-end">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center ">
-                    <li class="page-item disabled ">
-                        <a class="text-black" href="#" tabindex="-1"><small>Previous Page</small> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="text-black" href="#"> &nbsp; <small>Next Page</small></a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </section>
 
@@ -355,23 +77,8 @@
                 <div class="row py-2" style="background: #FCFCFC; ">
                     <div class="col-lg-8 mrl_head">
                         <h4> 
-                            <img src="{{ asset('public/admin/assets/img/frieght-imgs/log-in.png') }}" alt="truck" class="IMG-FLUID">
-                             &nbsp; 
-                            Departed Companies
+                            <img src="{{ asset('public/admin/assets/img/frieght-imgs/log-in.png') }}" alt="truck" class="IMG-FLUID"> &nbsp; Expired Members
                         </h4>
-                    </div>
-                    <div class="col-lg-4 mt-2 brd_crmbs ">
-                        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
-                            aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item  active"><a href="#">7D</a></li>
-                                <li class="breadcrumb-item " aria-current="page">30D</li>
-                                <li class="breadcrumb-item " aria-current="page">6M</li>
-                                <li class="breadcrumb-item " aria-current="page">1Y</li>
-                                <li class="breadcrumb-item " aria-current="page">YTD</li>
-                                <li class="breadcrumb-item " aria-current="page">Clear</li>
-                            </ol>
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -385,46 +92,8 @@
                 <form class="">
                     <div class="row">
                         <div class="mb-3 col">
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Company Name">
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Region</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Country</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Network</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <button class="btn btn-primary buttons_green  ">Search</button>
-                        </div>
-                    </div>
-    
-                    <div class="row">
-                        <div class="mb-3 col">
-                        </div>
-                        <div class="mb-3 col">
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Date Range</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <select id="disabledSelect" class="form-select">
-                                <option>Date Range</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col">
-                            <button class="btn btn-primary buttons_green  ">Search</button>
+                            <input type="text" class="form-control" id="expired_search"
+                                placeholder="search...">
                         </div>
                     </div>
                 </form>
@@ -434,45 +103,67 @@
     
         <div class="d-flex justify-content-center ">
             <table class="table table-borderless table-responsive">
-                <tbody>
+                <thead>
                     <tr class="top_head">
-                        <td>Company Name</td>
-                        <td>Country</td>
-                        <td>City</td>
-                        <td>Expiry Date</td>
+                        <th>SNo#</th>
+                        <th>Company Name</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>Expiry Date</th>
                     </tr>
-                    <tr class="para_txt">
-                        <td>ABC Logistics</td>
-                        <td>Country</td>
-                        <td>City</td>
-                        <td class="text-danger">1 January 2022</td>
-                    </tr>
-                    <tr class="para_txt">
-                        <td>ABC Logistics</td>
-                        <td>Country</td>
-                        <td>City</td>
-                        <td class="text-danger">1 January 2022</td>
+                </thead>
+                <tbody id="expired-members">
+                    @foreach ($models as $key=>$model)
+                        <tr class="para_txt">
+                            <td>{{ $models->firstItem()+$key }}.</td>
+                            <td>{{ $model->name }}</td>
+                            <td>{{ $model->country }}</td>
+                            <td>{{ $model->city }}</td>
+                            <td class="text-danger">{{ date('d, F-Y', strtotime($model->expire_date)) }}</td>
+                        </tr>
+                    @endforeach
+                    <tr>
+                        <td colspan="8">
+                            Displying {{$models->firstItem()}} to {{$models->lastItem()}} of {{$models->total()}} records
+                            <div class="d-flex justify-content-center">
+                                {!! $models->links('pagination::bootstrap-4') !!}
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-    
-        <div class="d-flex justify-content-end">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center ">
-                    <li class="page-item disabled ">
-                        <a class="text-black" href="#" tabindex="-1"><small>Previous Page</small> </a>
-                    </li>
-    
-                    <li class="page-item">
-                        <a class="text-black" href="#"> &nbsp; <small>Next Page</small></a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </section>
 </main>
 @endsection
 
 @push('js')
+    <script>
+        $('#login_search').keyup((function(e) {
+            var search = $(this).val();
+            var status = $('#status').val();
+            var pageurl = $('#page_url').val();
+            var page = 1;
+            fetchAll(pageurl, page, search, status);
+        }));
+
+        $(document).on('click', '.pagination a', function(event){
+            event.preventDefault();
+            var search = $('#search').val();
+            var status = $('#status').val();
+            var pageurl = $('#page_url').val();
+            var page = $(this).attr('href').split('page=')[1];
+            fetchAll(pageurl, page, search, status);
+        });
+
+        function fetchAll(pageurl, page, search, status){
+            $.ajax({
+                url:pageurl+'?page='+page+'&search='+search+'&status='+status,
+                type: 'get',
+                success: function(response){
+                    $('#body').html(response);
+                }
+            });
+        }
+    </script>
 @endpush

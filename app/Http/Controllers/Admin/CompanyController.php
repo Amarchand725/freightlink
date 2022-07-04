@@ -113,7 +113,7 @@ class CompanyController extends Controller
     public function show($slug)
     {
         $page_title = 'Show Company';
-        $model = Company::where('slug', $slug)->first();
+        return $model = Company::where('slug', $slug)->first();
         $networks = Network::where('status', 1)->get();
         return view('admin.company.show', compact('page_title', 'model', 'networks'));
     }

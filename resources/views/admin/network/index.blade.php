@@ -1,5 +1,6 @@
 @extends('layouts.admin.app')
 @section('title', $page_title)
+<input type="hidden" id="page_url" value="{{ route('network.index') }}">
 
 @push('css')
 	<style>
@@ -32,7 +33,8 @@
 				<div class="col-lg-12 frm_st">
 					<div class="row">
 						<div class="mb-3 col-sm-10">
-							<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Search...">
+							<input type="text" class="form-control" id="search" placeholder="Search...">
+							<input type="hidden" class="form-control" id="status" placeholder="Search...">
 						</div>
 						<div class="mb-3 col-sm-2">
 							<a href="{{ route('network.create') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Create New Network" class="btn btn-primary buttons_green">Add New</a>
@@ -55,7 +57,7 @@
 							<th width="140">Action</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="body">
 						@foreach($models as $key=>$model)
 							<tr id="id-{{ $model->slug }}">
 								<td>{{  $models->firstItem()+$key }}.</td>

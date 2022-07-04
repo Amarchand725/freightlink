@@ -18,9 +18,9 @@ class FaqController extends Controller
     {
         if($request->ajax()){
             $query = Faq::orderby('id', 'desc')->where('id', '>', 0);
-            if($request['search'] != ""){
-                $query->where('name', 'like', '%'. $request['search'] .'%')
-                    ->orWhere('price', 'like', '%'. $request['search'] .'%');
+            if($request['search'] != " "){
+                $query->where('question', 'like', '%'. $request['search'] .'%')
+                    ->orWhere('answer', 'like', '%'. $request['search'] .'%');
             }
             if($request['status']!="All"){
                 if($request['status']==2){

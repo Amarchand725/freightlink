@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title', $page_title)
-
+<input type="hidden" id="page_url" value="{{ route('role.index') }}">
 @section('content')
 	<main id="main" class="main">
 		<div class="search-bar search_bt">
@@ -20,11 +20,9 @@
 				<!-- Left side columns -->
 				<div class="col-lg-12 frm_st">
 					<div class="row">
-						<div class="mb-3 col-sm-9">
-							<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Search...">
-						</div>
-						<div class="mb-3 col-sm-1">
-							<button class="btn btn-primary buttons_green">Search</button>
+						<div class="mb-3 col-sm-10">
+							<input type="text" class="form-control" id="search" placeholder="Search...">
+							<input type="hidden" class="form-control" id="status">
 						</div>
 						<div class="mb-3 col-sm-2">
 							<a href="{{ route('role.create') }}" class="btn btn-primary buttons_green">Add New Role</a>
@@ -45,7 +43,7 @@
 							<th width="140">Action</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="body">
 						@foreach($roles as $key=>$model)
 							<tr id="id-{{ $model->id }}">
 								<td>{{  $roles->firstItem()+$key }}.</td>

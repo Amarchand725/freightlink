@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2022 at 05:38 PM
+-- Generation Time: Jul 04, 2022 at 05:11 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -273,6 +273,29 @@ INSERT INTO `faqs` (`id`, `created_by`, `question`, `answer`, `status`, `deleted
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `login_histories`
+--
+
+CREATE TABLE `login_histories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `login_id` bigint(20) NOT NULL,
+  `login_time` datetime NOT NULL,
+  `logout_time` datetime DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `login_histories`
+--
+
+INSERT INTO `login_histories` (`id`, `login_id`, `login_time`, `logout_time`, `created_at`, `updated_at`) VALUES
+(1, 13, '2022-07-04 12:45:29', NULL, '2022-07-04 07:45:29', '2022-07-04 07:45:29'),
+(2, 13, '2022-07-04 12:45:42', NULL, '2022-07-04 07:45:42', '2022-07-04 07:45:42');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mail_settings`
 --
 
@@ -336,7 +359,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (28, '2022_06_16_105328_create_companies_table', 12),
 (29, '2022_06_16_130804_create_networks_table', 13),
 (30, '2022_06_30_134013_create_announcements_table', 14),
-(31, '2022_06_30_134858_create_suggestions_table', 15);
+(31, '2022_06_30_134858_create_suggestions_table', 15),
+(34, '2022_07_04_123448_create_login_histories_table', 16);
 
 -- --------------------------------------------------------
 
@@ -974,6 +998,12 @@ ALTER TABLE `faqs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `login_histories`
+--
+ALTER TABLE `login_histories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `mail_settings`
 --
 ALTER TABLE `mail_settings`
@@ -1172,6 +1202,12 @@ ALTER TABLE `faqs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `login_histories`
+--
+ALTER TABLE `login_histories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `mail_settings`
 --
 ALTER TABLE `mail_settings`
@@ -1181,7 +1217,7 @@ ALTER TABLE `mail_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `networks`

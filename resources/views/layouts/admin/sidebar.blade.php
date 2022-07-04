@@ -28,7 +28,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('company/departed_members') ? 'active' : '' }}" href="{{ route('company.departed_members') }}">
+                <a class="nav-link {{ request()->is('departed_members') ? 'active' : '' }}" href="{{ route('departed_members') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
                     <span> &nbsp; Departed Members</span>
                 </a>
@@ -153,7 +153,7 @@
             <!-- End Forms Nav -->
 
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('company/departed_members') ? 'active' : '' }}" href="{{ route('company.departed_members') }}">
+                <a class="nav-link {{ request()->is('departed_members') ? 'active' : '' }}" href="{{ route('departed_members') }}">
                     <img src="{{ asset('public/admin/assets/img/frieght-imgs/users-ic.png') }}" alt="dashboard" class="img-fluid">
                     <span> &nbsp; Departed Members</span>
                 </a>

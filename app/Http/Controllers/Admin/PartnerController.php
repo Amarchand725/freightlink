@@ -17,10 +17,10 @@ class PartnerController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $query = Partner::orderby('id', 'desc')->where('id', '>', 0);
-            if($request['search'] != ""){
+            $query = Partner::orderby('id', 'desc');
+            if($request['search'] != " "){
                 $query->where('name', 'like', '%'. $request['search'] .'%')
-                    ->orWhere('price', 'like', '%'. $request['search'] .'%');
+                    ->orWhere('description', 'like', '%'. $request['search'] .'%');
             }
             if($request['status']!="All"){
                 if($request['status']==2){

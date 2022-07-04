@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title', $page_title)
-
+<input type="hidden" id="page_url" value="{{ route('subscribe.index') }}">
 @section('content')
 	<main id="main" class="main">
 		<div class="search-bar search_bt">
@@ -21,7 +21,8 @@
 				<div class="col-lg-12 frm_st">
 					<div class="row">
 						<div class="mb-3 col-sm-10">
-							<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Search...">
+							<input type="text" class="form-control" id="search" placeholder="Search...">
+							<input type="hidden" class="form-control" value="All" id="status" placeholder="Search...">
 						</div>
 					</div>
 				</div>
@@ -38,7 +39,7 @@
 							<th width="140">Action</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="body">
 						@foreach($models as $key=>$model)
 							<tr id="id-{{ $model->id }}">
 								<td>{{  $models->firstItem()+$key }}.</td>

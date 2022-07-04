@@ -1,20 +1,24 @@
-@foreach($roles as $key=>$role)
-    <tr id="id-{{ $role->id }}">
+@foreach($roles as $key=>$model)
+    <tr id="id-{{ $model->id }}">
         <td>{{  $roles->firstItem()+$key }}.</td>
-        <td>{{ $role->name }}</td>
-        <td>{!! $role->description !!}</td>
+        <td>{!! $model->name??'N/A' !!}</td>
+        <td>{!! \Illuminate\Support\Str::limit($model->description,60) !!}</td>
         <td>
-            @can('role-edit')
-                <a class="btn btn-primary btn-xs" href="{{ route('role.edit', $role->id) }}"><i class="fa fa-edit"></i> Edit</a>
-            @endcan
-            @can('role-delete')
-                <button class="btn btn-danger btn-xs delete" data-role-id="{{ $role->id }}"><i class="fa fa-trash"></i> Delete</button>
-            @endcan
+            @if($model->status)
+                <span class="label label-success">Active</span>
+            @else
+                <span class="label label-danger">In-Active</span>
+            @endif
+        </td>
+        <td>{{ date('d, F-Y h:i a', strtotime($model->created_at)) }}</td>
+        <td width="250px">
+            <a href="{{route('role.edit', $model->id)}}" data-toggle="tooltip" data-placement="top" title="Edit Partner" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
+            <button class="btn btn-danger btn-sm delete" data-toggle="tooltip" data-placement="top" title="Delete Partner" data-slug="{{ $model->id }}" data-del-url="{{ route('role.destroy', $model->id) }}"><i class="fa fa-trash"></i> Delete</button>
         </td>
     </tr>
 @endforeach
 <tr>
-    <td colspan="4">
+    <td colspan="8">
         Displying {{$roles->firstItem()}} to {{$roles->lastItem()}} of {{$roles->total()}} records
         <div class="d-flex justify-content-center">
             {!! $roles->links('pagination::bootstrap-4') !!}
